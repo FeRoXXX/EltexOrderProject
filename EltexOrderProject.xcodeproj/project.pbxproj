@@ -7,21 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27CED8312CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8302CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift */; };
+		27CED8332CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8322CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift */; };
+		27CED8352CC0E64A00FE6E66 /* TwoElementsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8342CC0E64A00FE6E66 /* TwoElementsLabel.swift */; };
+		27CED8372CC1063F00FE6E66 /* HidePromoCodesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8362CC1063F00FE6E66 /* HidePromoCodesCell.swift */; };
+		27CED83A2CC11F3600FE6E66 /* OrderInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8392CC11F3600FE6E66 /* OrderInfoModel.swift */; };
+		27CED83C2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED83B2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift */; };
+		27CED8422CC1311A00FE6E66 /* DiscountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8412CC1311A00FE6E66 /* DiscountView.swift */; };
+		27CED8442CC1352200FE6E66 /* ThreeItemStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8432CC1352200FE6E66 /* ThreeItemStack.swift */; };
+		27CED8462CC2702E00FE6E66 /* OrderInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8452CC2702E00FE6E66 /* OrderInfoViewModel.swift */; };
+		27CED8482CC278A200FE6E66 /* OrderInfoViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8472CC278A100FE6E66 /* OrderInfoViewModelDelegate.swift */; };
+		27CED84B2CC2ADCA00FE6E66 /* OrderInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED84A2CC2ADCA00FE6E66 /* OrderInfoTableView.swift */; };
+		27CED84E2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED84D2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift */; };
 		27EC9F7B2CBF823100BEF768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F7A2CBF823100BEF768 /* AppDelegate.swift */; };
 		27EC9F7D2CBF823100BEF768 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F7C2CBF823100BEF768 /* SceneDelegate.swift */; };
-		27EC9F7F2CBF823100BEF768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F7E2CBF823100BEF768 /* ViewController.swift */; };
 		27EC9F842CBF823300BEF768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27EC9F832CBF823300BEF768 /* Assets.xcassets */; };
 		27EC9F872CBF823300BEF768 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 27EC9F862CBF823300BEF768 /* Base */; };
+		27EC9F962CBF870400BEF768 /* OrderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F952CBF870400BEF768 /* OrderInfoViewController.swift */; };
+		27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */; };
+		27EC9F9C2CBFAD5D00BEF768 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27EC9F9B2CBFAD5D00BEF768 /* SnapKit */; };
+		27EC9F9E2CBFAD5D00BEF768 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 27EC9F9D2CBFAD5D00BEF768 /* SnapKit-Dynamic */; };
+		27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27CED8302CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCodeTopItemCell.swift; sourceTree = "<group>"; };
+		27CED8322CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeBottomItemCell.swift; sourceTree = "<group>"; };
+		27CED8342CC0E64A00FE6E66 /* TwoElementsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoElementsLabel.swift; sourceTree = "<group>"; };
+		27CED8362CC1063F00FE6E66 /* HidePromoCodesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HidePromoCodesCell.swift; sourceTree = "<group>"; };
+		27CED8392CC11F3600FE6E66 /* OrderInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoModel.swift; sourceTree = "<group>"; };
+		27CED83B2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoTableViewModel.swift; sourceTree = "<group>"; };
+		27CED8412CC1311A00FE6E66 /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
+		27CED8432CC1352200FE6E66 /* ThreeItemStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeItemStack.swift; sourceTree = "<group>"; };
+		27CED8452CC2702E00FE6E66 /* OrderInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoViewModel.swift; sourceTree = "<group>"; };
+		27CED8472CC278A100FE6E66 /* OrderInfoViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoViewModelDelegate.swift; sourceTree = "<group>"; };
+		27CED84A2CC2ADCA00FE6E66 /* OrderInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoTableView.swift; sourceTree = "<group>"; };
+		27CED84D2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoModuleAssembly.swift; sourceTree = "<group>"; };
 		27EC9F772CBF823100BEF768 /* EltexOrderProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EltexOrderProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC9F7A2CBF823100BEF768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27EC9F7C2CBF823100BEF768 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		27EC9F7E2CBF823100BEF768 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27EC9F832CBF823300BEF768 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27EC9F862CBF823300BEF768 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27EC9F882CBF823300BEF768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27EC9F952CBF870400BEF768 /* OrderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoViewController.swift; sourceTree = "<group>"; };
+		27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoView.swift; sourceTree = "<group>"; };
+		27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +59,77 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27EC9F9C2CBFAD5D00BEF768 /* SnapKit in Frameworks */,
+				27EC9F9E2CBFAD5D00BEF768 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27CED8382CC11F2500FE6E66 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8392CC11F3600FE6E66 /* OrderInfoModel.swift */,
+				27CED83B2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift */,
+				27CED8452CC2702E00FE6E66 /* OrderInfoViewModel.swift */,
+				27CED8472CC278A100FE6E66 /* OrderInfoViewModelDelegate.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		27CED83D2CC130C700FE6E66 /* TopItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8302CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift */,
+			);
+			path = TopItemCell;
+			sourceTree = "<group>";
+		};
+		27CED83E2CC130D500FE6E66 /* PromoCodeCell */ = {
+			isa = PBXGroup;
+			children = (
+				27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */,
+				27CED8412CC1311A00FE6E66 /* DiscountView.swift */,
+				27CED8432CC1352200FE6E66 /* ThreeItemStack.swift */,
+			);
+			path = PromoCodeCell;
+			sourceTree = "<group>";
+		};
+		27CED83F2CC130E300FE6E66 /* HidePromoCodesCell */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8362CC1063F00FE6E66 /* HidePromoCodesCell.swift */,
+			);
+			path = HidePromoCodesCell;
+			sourceTree = "<group>";
+		};
+		27CED8402CC130F400FE6E66 /* BottomItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8342CC0E64A00FE6E66 /* TwoElementsLabel.swift */,
+				27CED8322CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift */,
+			);
+			path = BottomItemCell;
+			sourceTree = "<group>";
+		};
+		27CED8492CC2ADB700FE6E66 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				27EC9F992CBFA80000BEF768 /* TableViewCells */,
+				27CED84A2CC2ADCA00FE6E66 /* OrderInfoTableView.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		27CED84C2CC2B97300FE6E66 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				27CED84D2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		27EC9F6E2CBF823100BEF768 = {
 			isa = PBXGroup;
 			children = (
@@ -83,9 +178,56 @@
 		27EC9F902CBF827200BEF768 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				27EC9F7E2CBF823100BEF768 /* ViewController.swift */,
+				27EC9F912CBF86B200BEF768 /* OrderInfoModule */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		27EC9F912CBF86B200BEF768 /* OrderInfoModule */ = {
+			isa = PBXGroup;
+			children = (
+				27CED84C2CC2B97300FE6E66 /* Assembly */,
+				27CED8382CC11F2500FE6E66 /* ViewModel */,
+				27EC9F922CBF86CD00BEF768 /* View */,
+			);
+			path = OrderInfoModule;
+			sourceTree = "<group>";
+		};
+		27EC9F922CBF86CD00BEF768 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27EC9F942CBF86D900BEF768 /* Controller */,
+				27EC9F932CBF86D400BEF768 /* View */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		27EC9F932CBF86D400BEF768 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8492CC2ADB700FE6E66 /* TableView */,
+				27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		27EC9F942CBF86D900BEF768 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				27EC9F952CBF870400BEF768 /* OrderInfoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		27EC9F992CBFA80000BEF768 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8402CC130F400FE6E66 /* BottomItemCell */,
+				27CED83F2CC130E300FE6E66 /* HidePromoCodesCell */,
+				27CED83E2CC130D500FE6E66 /* PromoCodeCell */,
+				27CED83D2CC130C700FE6E66 /* TopItemCell */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,6 +246,10 @@
 			dependencies = (
 			);
 			name = EltexOrderProject;
+			packageProductDependencies = (
+				27EC9F9B2CBFAD5D00BEF768 /* SnapKit */,
+				27EC9F9D2CBFAD5D00BEF768 /* SnapKit-Dynamic */,
+			);
 			productName = EltexOrderProject;
 			productReference = 27EC9F772CBF823100BEF768 /* EltexOrderProject.app */;
 			productType = "com.apple.product-type.application";
@@ -132,6 +278,9 @@
 				Base,
 			);
 			mainGroup = 27EC9F6E2CBF823100BEF768;
+			packageReferences = (
+				27EC9F9A2CBFAD5C00BEF768 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 27EC9F782CBF823100BEF768 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -158,9 +307,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27EC9F7F2CBF823100BEF768 /* ViewController.swift in Sources */,
+				27CED8352CC0E64A00FE6E66 /* TwoElementsLabel.swift in Sources */,
+				27CED8372CC1063F00FE6E66 /* HidePromoCodesCell.swift in Sources */,
+				27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */,
 				27EC9F7B2CBF823100BEF768 /* AppDelegate.swift in Sources */,
+				27CED8442CC1352200FE6E66 /* ThreeItemStack.swift in Sources */,
+				27CED8332CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift in Sources */,
+				27CED84E2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift in Sources */,
+				27CED8312CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift in Sources */,
+				27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */,
+				27CED8422CC1311A00FE6E66 /* DiscountView.swift in Sources */,
+				27CED8462CC2702E00FE6E66 /* OrderInfoViewModel.swift in Sources */,
+				27CED83A2CC11F3600FE6E66 /* OrderInfoModel.swift in Sources */,
+				27CED83C2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift in Sources */,
+				27CED8482CC278A200FE6E66 /* OrderInfoViewModelDelegate.swift in Sources */,
 				27EC9F7D2CBF823100BEF768 /* SceneDelegate.swift in Sources */,
+				27CED84B2CC2ADCA00FE6E66 /* OrderInfoTableView.swift in Sources */,
+				27EC9F962CBF870400BEF768 /* OrderInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +534,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		27EC9F9A2CBFAD5C00BEF768 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27EC9F9B2CBFAD5D00BEF768 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27EC9F9A2CBFAD5C00BEF768 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		27EC9F9D2CBFAD5D00BEF768 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27EC9F9A2CBFAD5C00BEF768 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27EC9F6F2CBF823100BEF768 /* Project object */;
 }

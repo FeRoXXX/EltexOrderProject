@@ -20,12 +20,14 @@ final class TwoElementsLabel: UIView {
     
     private var leftText: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     
     private var rightText: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     
@@ -33,7 +35,7 @@ final class TwoElementsLabel: UIView {
         let button = UIButton()
         button.tintColor = .gray
         var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(systemName: "info.circle")
+        configuration.image = .info
         button.configuration = configuration
         button.isHidden = true
         return button
@@ -116,5 +118,10 @@ extension TwoElementsLabel {
     func setText(_ firstText: String, _ secondText: String) {
         leftText.text = firstText
         rightText.text = secondText
+    }
+    
+    func setFont(_ font: UIFont) {
+        rightText.font = font
+        leftText.font = font
     }
 }

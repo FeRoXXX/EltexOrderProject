@@ -19,6 +19,11 @@ final class OrderInfoViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.setHidesBackButton(true, animated: true)
+    }
+    
     //MARK: - Initialization functions
     init(viewModel: OrderInfoViewModel) {
         self.viewModel = viewModel
@@ -38,11 +43,15 @@ private extension OrderInfoViewController {
     //MARK: - UI initialization functions
     func setupUI() {
         self.view = contentView
-        setupTitle()
+        setupNavigationBar()
     }
     
-    func setupTitle() {
-        title = "Оформление заказа"
+    func setupNavigationBar() {
+        let standard = UINavigationBarAppearance()
+        standard.configureWithOpaqueBackground()
+        standard.backgroundColor = .white
+        standard.shadowColor = .black
+        navigationController?.navigationBar.standardAppearance = standard
     }
 }
 
@@ -51,5 +60,16 @@ extension OrderInfoViewController: OrderInfoViewModelDelegate {
     
     func cellDidChange(_ data: [OrderInfoTableViewModel]) {
         contentView.setupTable(data)
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ок", style: .cancel)
+        alert.addAction(alertAction)
+        present(alert, animated: true)
+    }
+    
+    func setTitle(_ title: String) {
+        self.title = title
     }
 }

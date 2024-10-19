@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct OrderInfoTableViewModel {
+struct OrderInfoTableViewModel: Equatable {
     
     //MARK: - Properties
     var type: ViewModelType
     
     //MARK: - Enum
-    enum ViewModelType {
+    enum ViewModelType: Equatable {
         
         struct TopItemCell {
             //MARK: - Properties
@@ -29,7 +29,8 @@ struct OrderInfoTableViewModel {
             let percent: Int
             let date: String?
             let additionalInformation: String?
-            let isToggle: Bool
+            var isToggle: Bool
+            let toggle: ((Bool, UUID) -> Void)?
         }
 
         struct HidePromoCell {
@@ -44,18 +45,30 @@ struct OrderInfoTableViewModel {
             let discountTitle: String
             let discountPrice: String
             let promoCodeTitle: String
-            let promoCodePrice: String
+            var promoCodePrice: String
             let paymentMethodTitle: String
             let paymentMethodPrice: String
             let resultTitle: String
-            let resultPrice: String
+            var resultPrice: String
             let nextButtonTitle: String
-            let userAgreement: String
+            let userAgreement: NSAttributedString
         }
         
         case topItem(TopItemCell)
         case promo(PromoCell)
         case hidePromo(HidePromoCell)
         case bottomItem(BottomItemCell)
+        
+        static func== (lhs: ViewModelType, rhs: ViewModelType) -> Bool {
+            switch (lhs, rhs) {
+            case (.topItem, .topItem),
+                (.promo, .promo),
+                (.hidePromo, .hidePromo),
+                (.bottomItem, .bottomItem):
+                return true
+            default:
+                return false
+            }
+        }
     }
 }

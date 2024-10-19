@@ -75,11 +75,15 @@ final class PromoCodeTableViewCell: UITableViewCell {
         return label
     }()
     
-    private var promoCodeActiveSwitch: UISwitch = {
+    private lazy var promoCodeActiveSwitch: UISwitch = {
         let promoCodeSwitch = UISwitch()
         promoCodeSwitch.onTintColor = .red
+        promoCodeSwitch.addTarget(self, action: #selector(togglePromocode), for: .touchUpInside)
         return promoCodeSwitch
     }()
+    
+    private var cellId: UUID?
+    private var toggle: ((Bool, UUID) -> Void)?
     
     var viewModel: OrderInfoTableViewModel.ViewModelType.PromoCell? {
         didSet {
@@ -157,6 +161,14 @@ private extension PromoCodeTableViewCell {
         promoCodeDateLabel.text = data.date
         promoCodeDescriptionLabel.text = data.additionalInformation
         promoCodeActiveSwitch.isOn = data.isToggle
+        cellId = data.id
+        toggle = data.toggle
+    }
+    
+    @objc
+    func togglePromocode() {
+        guard let cellId else { return }
+        toggle?(promoCodeActiveSwitch.isOn, cellId)
     }
 }
 

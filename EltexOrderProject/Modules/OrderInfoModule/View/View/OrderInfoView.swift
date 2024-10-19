@@ -47,7 +47,8 @@ private extension OrderInfoView {
     
     func setupConstraints() {
         contentTableView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalTo(safeAreaLayoutGuide)
+            make.top.leading.trailing.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
     }
 }

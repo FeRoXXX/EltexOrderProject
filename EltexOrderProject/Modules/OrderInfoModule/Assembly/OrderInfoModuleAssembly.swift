@@ -9,8 +9,8 @@ import UIKit
 
 final class OrderInfoModuleAssembly {
     
-    static func built() -> UIViewController {
-        let viewModel = OrderInfoViewModel()
+    static func built(order: Order) -> UIViewController {
+        let viewModel = OrderInfoViewModel(orderList: order)
         let controller = OrderInfoViewController(viewModel: viewModel)
         return controller
     }

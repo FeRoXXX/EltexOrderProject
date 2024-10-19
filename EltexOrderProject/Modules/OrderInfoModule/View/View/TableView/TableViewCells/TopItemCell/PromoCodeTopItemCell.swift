@@ -13,7 +13,8 @@ final class PromoCodeTopItemCell: UITableViewCell {
     //MARK: - Properties
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 24)//TODO: - Изменить фонт
+        label.font = UIFont.systemFont(ofSize: 24)
+        label.textColor = #colorLiteral(red: 0.1777858436, green: 0.1777858436, blue: 0.1777858436, alpha: 1)
         return label
     }()
     
@@ -27,7 +28,7 @@ final class PromoCodeTopItemCell: UITableViewCell {
     
     private var inputPromoCodeButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.plain()
+        var configuration = UIButton.Configuration.filled()
         configuration.image = .promocode
         configuration.baseForegroundColor = #colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)
         configuration.imagePadding = 10

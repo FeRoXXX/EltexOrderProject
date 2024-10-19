@@ -13,7 +13,8 @@ final class DiscountView: UIView {
     //MARK: - Properties
     private var discountLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textColor = .white
         return label
     }()
     
@@ -62,8 +63,8 @@ private extension DiscountView {
         }
         
         discountLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(5)
-            make.trailing.leading.equalToSuperview().inset(7)
+            make.top.bottom.equalToSuperview().inset(3)
+            make.trailing.leading.equalToSuperview().inset(5)
         }
     }
 }

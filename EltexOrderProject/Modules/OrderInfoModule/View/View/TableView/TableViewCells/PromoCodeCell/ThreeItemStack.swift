@@ -15,6 +15,7 @@ final class ThreeItemStack: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = #colorLiteral(red: 0.1777858436, green: 0.1777858436, blue: 0.1777858436, alpha: 1)
         return label
     }()
     
@@ -27,7 +28,7 @@ final class ThreeItemStack: UIView {
         let button = UIButton()
         button.tintColor = .gray
         var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(systemName: "info.circle")
+        configuration.image = .info
         configuration.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         button.configuration = configuration
         button.isHidden = false

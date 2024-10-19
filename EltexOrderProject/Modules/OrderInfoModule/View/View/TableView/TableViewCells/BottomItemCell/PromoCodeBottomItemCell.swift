@@ -99,15 +99,15 @@ private extension PromoCodeBottomItemCell {
     }
     
     func addSubviews() {
-        addSubview(priceLabel)
-        addSubview(discountLabel)
-        addSubview(promoCodeLabel)
-        addSubview(paymentMethodLabel)
-        addSubview(separatorView)
-        addSubview(finalPrice)
-        addSubview(placeAnOrderButton)
-        addSubview(userAgreementLabel)
-        addSubview(verticalStack)
+        contentView.addSubview(priceLabel)
+        contentView.addSubview(discountLabel)
+        contentView.addSubview(promoCodeLabel)
+        contentView.addSubview(paymentMethodLabel)
+        contentView.addSubview(separatorView)
+        contentView.addSubview(finalPrice)
+        contentView.addSubview(placeAnOrderButton)
+        contentView.addSubview(userAgreementLabel)
+        contentView.addSubview(verticalStack)
     }
     
     func setupConstraints() {
@@ -135,8 +135,9 @@ private extension PromoCodeBottomItemCell {
         promoCodeLabel.setText(data.promoCodeTitle, data.promoCodePrice)
         paymentMethodLabel.setText(data.paymentMethodTitle, data.paymentMethodPrice)
         finalPrice.setText(data.resultTitle, data.resultPrice)
+        finalPrice.setFont(UIFont.systemFont(ofSize: 18))
         placeAnOrderButton.configuration?.title = data.nextButtonTitle
-        userAgreementLabel.text = data.userAgreement
+        userAgreementLabel.attributedText = data.userAgreement
     }
 }
 

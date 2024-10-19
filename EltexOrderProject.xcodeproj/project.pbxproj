@@ -19,6 +19,11 @@
 		27CED8482CC278A200FE6E66 /* OrderInfoViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8472CC278A100FE6E66 /* OrderInfoViewModelDelegate.swift */; };
 		27CED84B2CC2ADCA00FE6E66 /* OrderInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED84A2CC2ADCA00FE6E66 /* OrderInfoTableView.swift */; };
 		27CED84E2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED84D2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift */; };
+		27CED8542CC36FD700FE6E66 /* TextConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8532CC36FD700FE6E66 /* TextConstants.swift */; };
+		27CED8572CC3C6E000FE6E66 /* InputProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8562CC3C6DF00FE6E66 /* InputProductsViewController.swift */; };
+		27CED85A2CC3CA3E00FE6E66 /* Extension + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8592CC3CA3E00FE6E66 /* Extension + String.swift */; };
+		27CED85C2CC3CA4B00FE6E66 /* Extension + Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED85B2CC3CA4B00FE6E66 /* Extension + Double.swift */; };
+		27CED85E2CC3CA7A00FE6E66 /* Extension + Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED85D2CC3CA7A00FE6E66 /* Extension + Date.swift */; };
 		27EC9F7B2CBF823100BEF768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F7A2CBF823100BEF768 /* AppDelegate.swift */; };
 		27EC9F7D2CBF823100BEF768 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F7C2CBF823100BEF768 /* SceneDelegate.swift */; };
 		27EC9F842CBF823300BEF768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27EC9F832CBF823300BEF768 /* Assets.xcassets */; };
@@ -43,6 +48,11 @@
 		27CED8472CC278A100FE6E66 /* OrderInfoViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoViewModelDelegate.swift; sourceTree = "<group>"; };
 		27CED84A2CC2ADCA00FE6E66 /* OrderInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoTableView.swift; sourceTree = "<group>"; };
 		27CED84D2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoModuleAssembly.swift; sourceTree = "<group>"; };
+		27CED8532CC36FD700FE6E66 /* TextConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConstants.swift; sourceTree = "<group>"; };
+		27CED8562CC3C6DF00FE6E66 /* InputProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProductsViewController.swift; sourceTree = "<group>"; };
+		27CED8592CC3CA3E00FE6E66 /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
+		27CED85B2CC3CA4B00FE6E66 /* Extension + Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Double.swift"; sourceTree = "<group>"; };
+		27CED85D2CC3CA7A00FE6E66 /* Extension + Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Date.swift"; sourceTree = "<group>"; };
 		27EC9F772CBF823100BEF768 /* EltexOrderProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EltexOrderProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27EC9F7A2CBF823100BEF768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27EC9F7C2CBF823100BEF768 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,8 +80,6 @@
 		27CED8382CC11F2500FE6E66 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				27CED8392CC11F3600FE6E66 /* OrderInfoModel.swift */,
-				27CED83B2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift */,
 				27CED8452CC2702E00FE6E66 /* OrderInfoViewModel.swift */,
 				27CED8472CC278A100FE6E66 /* OrderInfoViewModelDelegate.swift */,
 			);
@@ -130,6 +138,41 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
+		27CED84F2CC2BB9B00FE6E66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8392CC11F3600FE6E66 /* OrderInfoModel.swift */,
+				27CED83B2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		27CED8502CC36FBD00FE6E66 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8532CC36FD700FE6E66 /* TextConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		27CED8552CC3C6C100FE6E66 /* InputProducts */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8562CC3C6DF00FE6E66 /* InputProductsViewController.swift */,
+			);
+			path = InputProducts;
+			sourceTree = "<group>";
+		};
+		27CED8582CC3CA2900FE6E66 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				27CED8592CC3CA3E00FE6E66 /* Extension + String.swift */,
+				27CED85B2CC3CA4B00FE6E66 /* Extension + Double.swift */,
+				27CED85D2CC3CA7A00FE6E66 /* Extension + Date.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		27EC9F6E2CBF823100BEF768 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +192,8 @@
 		27EC9F792CBF823100BEF768 /* EltexOrderProject */ = {
 			isa = PBXGroup;
 			children = (
+				27CED8582CC3CA2900FE6E66 /* Extension */,
+				27CED8502CC36FBD00FE6E66 /* Constants */,
 				27EC9F902CBF827200BEF768 /* Modules */,
 				27EC9F8F2CBF826B00BEF768 /* Recources */,
 				27EC9F8E2CBF826200BEF768 /* App */,
@@ -178,6 +223,7 @@
 		27EC9F902CBF827200BEF768 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				27CED8552CC3C6C100FE6E66 /* InputProducts */,
 				27EC9F912CBF86B200BEF768 /* OrderInfoModule */,
 			);
 			path = Modules;
@@ -186,6 +232,7 @@
 		27EC9F912CBF86B200BEF768 /* OrderInfoModule */ = {
 			isa = PBXGroup;
 			children = (
+				27CED84F2CC2BB9B00FE6E66 /* Model */,
 				27CED84C2CC2B97300FE6E66 /* Assembly */,
 				27CED8382CC11F2500FE6E66 /* ViewModel */,
 				27EC9F922CBF86CD00BEF768 /* View */,
@@ -308,13 +355,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				27CED8352CC0E64A00FE6E66 /* TwoElementsLabel.swift in Sources */,
+				27CED85E2CC3CA7A00FE6E66 /* Extension + Date.swift in Sources */,
 				27CED8372CC1063F00FE6E66 /* HidePromoCodesCell.swift in Sources */,
+				27CED85A2CC3CA3E00FE6E66 /* Extension + String.swift in Sources */,
 				27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */,
 				27EC9F7B2CBF823100BEF768 /* AppDelegate.swift in Sources */,
+				27CED85C2CC3CA4B00FE6E66 /* Extension + Double.swift in Sources */,
+				27CED8542CC36FD700FE6E66 /* TextConstants.swift in Sources */,
 				27CED8442CC1352200FE6E66 /* ThreeItemStack.swift in Sources */,
 				27CED8332CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift in Sources */,
 				27CED84E2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift in Sources */,
 				27CED8312CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift in Sources */,
+				27CED8572CC3C6E000FE6E66 /* InputProductsViewController.swift in Sources */,
 				27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */,
 				27CED8422CC1311A00FE6E66 /* DiscountView.swift in Sources */,
 				27CED8462CC2702E00FE6E66 /* OrderInfoViewModel.swift in Sources */,

@@ -60,6 +60,7 @@ private extension DiscountView {
         contentMainView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.trailing.leading.greaterThanOrEqualToSuperview()
+            make.width.greaterThanOrEqualTo(40)
         }
         
         discountLabel.snp.makeConstraints { make in

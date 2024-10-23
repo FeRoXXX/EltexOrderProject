@@ -13,7 +13,48 @@ final class OrderInfoViewModel {
     private var orderList: Order
     private var orderListFormatted: [OrderInfoTableViewModel] {
         didSet {
-            delegate?.cellDidChange(orderListFormatted)
+            var indexes: [IndexPath] = []
+            for (index, element) in oldValue.enumerated() {
+                switch element.type {
+                case .topItem(let oldData):
+                    switch orderListFormatted[index].type {
+                    case .topItem(let data):
+                        if oldData != data {
+                            indexes.append(.init(row: index, section: 0))
+                        }
+                        default:
+                            break
+                    }
+                case .promo(let oldData):
+                    switch orderListFormatted[index].type {
+                    case .promo(let data):
+                        if oldData != data {
+                            indexes.append(.init(row: index, section: 0))
+                        }
+                        default:
+                            break
+                    }
+                case .hidePromo(let oldData):
+                    switch orderListFormatted[index].type {
+                    case .hidePromo(let data):
+                        if oldData != data {
+                            indexes.append(.init(row: index, section: 0))
+                        }
+                        default:
+                            break
+                    }
+                case .bottomItem(let oldData):
+                    switch orderListFormatted[index].type {
+                    case .bottomItem(let data):
+                        if oldData != data {
+                            indexes.append(.init(row: index, section: 0))
+                        }
+                        default:
+                            break
+                    }
+                }
+            }
+            delegate?.reloadCell(at: indexes, data: orderListFormatted)
         }
     }
     
@@ -188,11 +229,13 @@ private extension OrderInfoViewModel {
                 return false
             }
         }.count
+        changeToggle(isOn, id)
+        amountPrice(isOn, id)
         
         if numberOfPromocodes >= 2 && isOn {
+            errorMessage = "Нельзя применить больше 2х промокодов"
             changeToggle(!isOn, id)
             amountPrice(!isOn, id)
-            errorMessage = "Нельзя применить больше 2х промокодов"
         } else {
             changeToggle(isOn, id)
             amountPrice(isOn, id)

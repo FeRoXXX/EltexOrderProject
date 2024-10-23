@@ -75,6 +75,7 @@ private extension TwoElementsLabel {
         }
         
         leftText.snp.contentHuggingHorizontalPriority = 751
+        leftText.snp.contentHuggingVerticalPriority = 1000
         info.snp.contentHuggingHorizontalPriority = 750
         rightText.snp.contentHuggingHorizontalPriority = 740
     }

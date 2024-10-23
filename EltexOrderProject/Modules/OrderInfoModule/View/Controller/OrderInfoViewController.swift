@@ -72,4 +72,8 @@ extension OrderInfoViewController: OrderInfoViewModelDelegate {
     func setTitle(_ title: String) {
         self.title = title
     }
+    
+    func reloadCell(at indexes: [IndexPath], data: [OrderInfoTableViewModel]) {
+        contentView.reloadCell(at: indexes, data: data)
+    }
 }

@@ -76,6 +76,8 @@ private extension ThreeItemStack {
             make.top.bottom.trailing.leading.equalToSuperview()
         }
         
+        rightElement.snp.contentCompressionResistanceHorizontalPriority = 752
+        middleElement.snp.contentCompressionResistanceHorizontalPriority = 752
     }
 }
 

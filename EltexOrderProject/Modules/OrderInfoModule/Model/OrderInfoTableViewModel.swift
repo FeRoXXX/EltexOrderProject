@@ -7,22 +7,28 @@
 
 import Foundation
 
-struct OrderInfoTableViewModel: Equatable {
+struct OrderInfoTableViewModel {
     
     //MARK: - Properties
     var type: ViewModelType
     
     //MARK: - Enum
-    enum ViewModelType: Equatable {
+    enum ViewModelType {
         
-        struct TopItemCell {
+        struct TopItemCell: Equatable {
             //MARK: - Properties
             let title: String
             let info: String
             let buttonTitle: String
+            
+            static func == (lhs: TopItemCell, rhs: TopItemCell) -> Bool {
+                return lhs.title == rhs.title &&
+                lhs.info == rhs.info &&
+                lhs.buttonTitle == rhs.buttonTitle
+            }
         }
-
-        struct PromoCell {
+        
+        struct PromoCell: Equatable {
             //MARK: - Properties
             let id: UUID = UUID()
             let title: String
@@ -31,14 +37,27 @@ struct OrderInfoTableViewModel: Equatable {
             let additionalInformation: String?
             var isToggle: Bool
             let toggle: ((Bool, UUID) -> Void)?
+            
+            static func == (lhs: PromoCell, rhs: PromoCell) -> Bool {
+                return lhs.id == rhs.id &&
+                lhs.title == rhs.title &&
+                lhs.percent == rhs.percent &&
+                lhs.date == rhs.date &&
+                lhs.additionalInformation == rhs.additionalInformation &&
+                lhs.isToggle == rhs.isToggle
+            }
         }
-
-        struct HidePromoCell {
+        
+        struct HidePromoCell: Equatable {
             //MARK: - Properties
             let title: String
+            
+            static func== (lhs: HidePromoCell, rhs: HidePromoCell) -> Bool {
+                return lhs.title == rhs.title
+            }
         }
-
-        struct BottomItemCell {
+        
+        struct BottomItemCell: Equatable {
             //MARK: - Properties
             let generalTitle: String
             let generalPrice: String
@@ -52,6 +71,21 @@ struct OrderInfoTableViewModel: Equatable {
             var resultPrice: String
             let nextButtonTitle: String
             let userAgreement: NSAttributedString
+            
+            static func == (lhs: BottomItemCell, rhs: BottomItemCell) -> Bool {
+                return lhs.generalTitle == rhs.generalTitle &&
+                       lhs.generalPrice == rhs.generalPrice &&
+                       lhs.discountTitle == rhs.discountTitle &&
+                       lhs.discountPrice == rhs.discountPrice &&
+                       lhs.promoCodeTitle == rhs.promoCodeTitle &&
+                       lhs.promoCodePrice == rhs.promoCodePrice &&
+                       lhs.paymentMethodTitle == rhs.paymentMethodTitle &&
+                       lhs.paymentMethodPrice == rhs.paymentMethodPrice &&
+                       lhs.resultTitle == rhs.resultTitle &&
+                       lhs.resultPrice == rhs.resultPrice &&
+                       lhs.nextButtonTitle == rhs.nextButtonTitle &&
+                       lhs.userAgreement.string == rhs.userAgreement.string
+            }
         }
         
         case topItem(TopItemCell)
@@ -59,7 +93,7 @@ struct OrderInfoTableViewModel: Equatable {
         case hidePromo(HidePromoCell)
         case bottomItem(BottomItemCell)
         
-        static func== (lhs: ViewModelType, rhs: ViewModelType) -> Bool {
+        static func == (lhs: ViewModelType, rhs: ViewModelType) -> Bool {
             switch (lhs, rhs) {
             case (.topItem, .topItem),
                 (.promo, .promo),

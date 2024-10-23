@@ -11,4 +11,5 @@ protocol OrderInfoViewModelDelegate: AnyObject {
     func cellDidChange(_ data: [OrderInfoTableViewModel])
     func showAlert(message: String)
     func setTitle(_ title: String)
+    func reloadCell(at indexes: [IndexPath], data: [OrderInfoTableViewModel])
 }

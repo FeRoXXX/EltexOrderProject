@@ -61,7 +61,7 @@ final class PromoCodeTableViewCell: UITableViewCell {
     
     private var promoCodeDateLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = #colorLiteral(red: 0.551900208, green: 0.5519001484, blue: 0.5519001484, alpha: 1)
         return label
@@ -78,11 +78,10 @@ final class PromoCodeTableViewCell: UITableViewCell {
     private lazy var promoCodeActiveSwitch: UISwitch = {
         let promoCodeSwitch = UISwitch()
         promoCodeSwitch.onTintColor = .red
-        promoCodeSwitch.addTarget(self, action: #selector(togglePromocode), for: .touchUpInside)
+        promoCodeSwitch.addTarget(self, action: #selector(togglePromocode), for: .valueChanged)
         return promoCodeSwitch
     }()
     
-    private var cellId: UUID?
     private var toggle: ((Bool, UUID) -> Void)?
     
     var viewModel: OrderInfoTableViewModel.ViewModelType.PromoCell? {
@@ -100,6 +99,14 @@ final class PromoCodeTableViewCell: UITableViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Prepare for reuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        isHidden = false
+        isSelected = false
+        isHighlighted = false
     }
 }
 
@@ -131,10 +138,6 @@ private extension PromoCodeTableViewCell {
             make.top.bottom.equalToSuperview().inset(4)
         }
         
-        promoCodeTitleHorizontalStack.snp.makeConstraints { make in
-            make.right.equalTo(promoCodeTitleAndDateVerticalStack)
-        }
-        
         promoCodeVerticalStack.snp.makeConstraints { make in
             make.top.bottom.equalTo(mainContentView).inset(12)
             make.left.right.equalTo(mainContentView).inset(20)
@@ -159,16 +162,21 @@ private extension PromoCodeTableViewCell {
         
         promoCodeTitleHorizontalStack.setElements((data.title, data.percent))
         promoCodeDateLabel.text = data.date
-        promoCodeDescriptionLabel.text = data.additionalInformation
+        switch data.additionalInformation {
+        case "", nil:
+            promoCodeDescriptionLabel.isHidden = true
+        default:
+            promoCodeDescriptionLabel.isHidden = false
+            promoCodeDescriptionLabel.text = data.additionalInformation
+        }
         promoCodeActiveSwitch.isOn = data.isToggle
-        cellId = data.id
         toggle = data.toggle
     }
     
     @objc
     func togglePromocode() {
-        guard let cellId else { return }
-        toggle?(promoCodeActiveSwitch.isOn, cellId)
+        guard let viewModel else { return }
+        toggle?(promoCodeActiveSwitch.isOn, viewModel.id)
     }
 }
 

@@ -31,9 +31,21 @@
 		27EC9F962CBF870400BEF768 /* OrderInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F952CBF870400BEF768 /* OrderInfoViewController.swift */; };
 		27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */; };
 		27EC9F9C2CBFAD5D00BEF768 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27EC9F9B2CBFAD5D00BEF768 /* SnapKit */; };
-		27EC9F9E2CBFAD5D00BEF768 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 27EC9F9D2CBFAD5D00BEF768 /* SnapKit-Dynamic */; };
 		27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		279F6A2A2CC8C1A00002892F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		27CED8302CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCodeTopItemCell.swift; sourceTree = "<group>"; };
@@ -70,7 +82,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				27EC9F9C2CBFAD5D00BEF768 /* SnapKit in Frameworks */,
-				27EC9F9E2CBFAD5D00BEF768 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +298,7 @@
 				27EC9F732CBF823100BEF768 /* Sources */,
 				27EC9F742CBF823100BEF768 /* Frameworks */,
 				27EC9F752CBF823100BEF768 /* Resources */,
+				279F6A2A2CC8C1A00002892F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -295,7 +307,6 @@
 			name = EltexOrderProject;
 			packageProductDependencies = (
 				27EC9F9B2CBFAD5D00BEF768 /* SnapKit */,
-				27EC9F9D2CBFAD5D00BEF768 /* SnapKit-Dynamic */,
 			);
 			productName = EltexOrderProject;
 			productReference = 27EC9F772CBF823100BEF768 /* EltexOrderProject.app */;
@@ -603,11 +614,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 27EC9F9A2CBFAD5C00BEF768 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		27EC9F9D2CBFAD5D00BEF768 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 27EC9F9A2CBFAD5C00BEF768 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

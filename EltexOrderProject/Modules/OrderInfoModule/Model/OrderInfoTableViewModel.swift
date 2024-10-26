@@ -20,6 +20,7 @@ struct OrderInfoTableViewModel {
             let title: String
             let info: String
             let buttonTitle: String
+            let buttonAction: (() -> Void)?
             
             static func == (lhs: TopItemCell, rhs: TopItemCell) -> Bool {
                 return lhs.title == rhs.title &&
@@ -35,6 +36,7 @@ struct OrderInfoTableViewModel {
             let percent: Int
             let date: String?
             let additionalInformation: String?
+            var isHidden: Bool = false
             var isToggle: Bool
             let toggle: ((Bool, UUID) -> Void)?
             
@@ -44,16 +46,19 @@ struct OrderInfoTableViewModel {
                 lhs.percent == rhs.percent &&
                 lhs.date == rhs.date &&
                 lhs.additionalInformation == rhs.additionalInformation &&
-                lhs.isToggle == rhs.isToggle
+                lhs.isToggle == rhs.isToggle &&
+                lhs.isHidden == rhs.isHidden
             }
         }
         
         struct HidePromoCell: Equatable {
             //MARK: - Properties
-            let title: String
+            var title: String
+            let hidePromoCode: (() -> Void)?
+            var isHidden: Bool
             
             static func== (lhs: HidePromoCell, rhs: HidePromoCell) -> Bool {
-                return lhs.title == rhs.title
+                return lhs.title == rhs.title && lhs.isHidden == rhs.isHidden
             }
         }
         

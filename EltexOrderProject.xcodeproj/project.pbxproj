@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		279F6A352CCB77AB0002892F /* ActivatePromocodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A342CCB77AB0002892F /* ActivatePromocodeViewController.swift */; };
+		279F6A372CCB77B40002892F /* ActivatePromocodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A362CCB77B40002892F /* ActivatePromocodeView.swift */; };
+		279F6A392CCB79E20002892F /* PromoCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A382CCB79E20002892F /* PromoCodeTextField.swift */; };
+		279F6A3B2CCBAD010002892F /* ActivePromocodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A3A2CCBAD010002892F /* ActivePromocodeViewModel.swift */; };
+		279F6A3D2CCBAD100002892F /* ActivePromocodeViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A3C2CCBAD100002892F /* ActivePromocodeViewModelDelegate.swift */; };
+		279F6A402CCBBD510002892F /* ActivePromocodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A3F2CCBBD510002892F /* ActivePromocodeModel.swift */; };
+		279F6A432CCBC5C30002892F /* ActivePromocodeModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A422CCBC5C30002892F /* ActivePromocodeModuleAssembly.swift */; };
 		27CED8312CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8302CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift */; };
 		27CED8332CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8322CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift */; };
 		27CED8352CC0E64A00FE6E66 /* TwoElementsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CED8342CC0E64A00FE6E66 /* TwoElementsLabel.swift */; };
@@ -48,6 +55,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		279F6A342CCB77AB0002892F /* ActivatePromocodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatePromocodeViewController.swift; sourceTree = "<group>"; };
+		279F6A362CCB77B40002892F /* ActivatePromocodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatePromocodeView.swift; sourceTree = "<group>"; };
+		279F6A382CCB79E20002892F /* PromoCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTextField.swift; sourceTree = "<group>"; };
+		279F6A3A2CCBAD010002892F /* ActivePromocodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePromocodeViewModel.swift; sourceTree = "<group>"; };
+		279F6A3C2CCBAD100002892F /* ActivePromocodeViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePromocodeViewModelDelegate.swift; sourceTree = "<group>"; };
+		279F6A3F2CCBBD510002892F /* ActivePromocodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePromocodeModel.swift; sourceTree = "<group>"; };
+		279F6A422CCBC5C30002892F /* ActivePromocodeModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivePromocodeModuleAssembly.swift; sourceTree = "<group>"; };
 		27CED8302CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCodeTopItemCell.swift; sourceTree = "<group>"; };
 		27CED8322CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeBottomItemCell.swift; sourceTree = "<group>"; };
 		27CED8342CC0E64A00FE6E66 /* TwoElementsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoElementsLabel.swift; sourceTree = "<group>"; };
@@ -88,6 +102,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		279F6A2F2CCB77650002892F /* ActivatePromocodeModule */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A412CCBC5B20002892F /* Assembly */,
+				279F6A3E2CCBBD410002892F /* Model */,
+				279F6A312CCB778F0002892F /* ViewModel */,
+				279F6A302CCB77860002892F /* View */,
+			);
+			path = ActivatePromocodeModule;
+			sourceTree = "<group>";
+		};
+		279F6A302CCB77860002892F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A332CCB77990002892F /* Controller */,
+				279F6A322CCB77950002892F /* View */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		279F6A312CCB778F0002892F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A3A2CCBAD010002892F /* ActivePromocodeViewModel.swift */,
+				279F6A3C2CCBAD100002892F /* ActivePromocodeViewModelDelegate.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		279F6A322CCB77950002892F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A362CCB77B40002892F /* ActivatePromocodeView.swift */,
+				279F6A382CCB79E20002892F /* PromoCodeTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		279F6A332CCB77990002892F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A342CCB77AB0002892F /* ActivatePromocodeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		279F6A3E2CCBBD410002892F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A3F2CCBBD510002892F /* ActivePromocodeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		279F6A412CCBC5B20002892F /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				279F6A422CCBC5C30002892F /* ActivePromocodeModuleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
 		27CED8382CC11F2500FE6E66 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +310,7 @@
 		27EC9F902CBF827200BEF768 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				279F6A2F2CCB77650002892F /* ActivatePromocodeModule */,
 				27CED8552CC3C6C100FE6E66 /* InputProducts */,
 				27EC9F912CBF86B200BEF768 /* OrderInfoModule */,
 			);
@@ -369,16 +446,22 @@
 				27CED85E2CC3CA7A00FE6E66 /* Extension + Date.swift in Sources */,
 				27CED8372CC1063F00FE6E66 /* HidePromoCodesCell.swift in Sources */,
 				27CED85A2CC3CA3E00FE6E66 /* Extension + String.swift in Sources */,
+				279F6A432CCBC5C30002892F /* ActivePromocodeModuleAssembly.swift in Sources */,
 				27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */,
 				27EC9F7B2CBF823100BEF768 /* AppDelegate.swift in Sources */,
+				279F6A402CCBBD510002892F /* ActivePromocodeModel.swift in Sources */,
 				27CED85C2CC3CA4B00FE6E66 /* Extension + Double.swift in Sources */,
 				27CED8542CC36FD700FE6E66 /* TextConstants.swift in Sources */,
 				27CED8442CC1352200FE6E66 /* ThreeItemStack.swift in Sources */,
+				279F6A352CCB77AB0002892F /* ActivatePromocodeViewController.swift in Sources */,
+				279F6A372CCB77B40002892F /* ActivatePromocodeView.swift in Sources */,
 				27CED8332CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift in Sources */,
 				27CED84E2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift in Sources */,
 				27CED8312CC0DC1F00FE6E66 /* PromoCodeTopItemCell.swift in Sources */,
+				279F6A392CCB79E20002892F /* PromoCodeTextField.swift in Sources */,
 				27CED8572CC3C6E000FE6E66 /* InputProductsViewController.swift in Sources */,
 				27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */,
+				279F6A3B2CCBAD010002892F /* ActivePromocodeViewModel.swift in Sources */,
 				27CED8422CC1311A00FE6E66 /* DiscountView.swift in Sources */,
 				27CED8462CC2702E00FE6E66 /* OrderInfoViewModel.swift in Sources */,
 				27CED83A2CC11F3600FE6E66 /* OrderInfoModel.swift in Sources */,
@@ -387,6 +470,7 @@
 				27EC9F7D2CBF823100BEF768 /* SceneDelegate.swift in Sources */,
 				27CED84B2CC2ADCA00FE6E66 /* OrderInfoTableView.swift in Sources */,
 				27EC9F962CBF870400BEF768 /* OrderInfoViewController.swift in Sources */,
+				279F6A3D2CCBAD100002892F /* ActivePromocodeViewModelDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

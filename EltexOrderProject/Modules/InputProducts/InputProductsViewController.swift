@@ -28,6 +28,9 @@ final class InputProductsViewController: UIViewController {
             .init(title: "4300162112534", percent: 5, endDate: Date(), info: nil, active: true),
             .init(title: "4300162112534", percent: 5, endDate: Date(), info: nil, active: false)
         ],
+        availableForActive: [
+            .init(title: "Buks", percent: 5, endDate: Date(), info: "Секретны промокод", active: true)
+        ],
         products: [.init(price: 10000, title: ""), .init(price: 15000, title: "")],
         paymentDiscount: 5000,
         baseDiscount: 5000)

@@ -82,8 +82,6 @@ final class PromoCodeTableViewCell: UITableViewCell {
         return promoCodeSwitch
     }()
     
-    private var toggle: ((Bool, UUID) -> Void)?
-    
     var viewModel: OrderInfoTableViewModel.ViewModelType.PromoCell? {
         didSet {
             updateUI()
@@ -170,13 +168,12 @@ private extension PromoCodeTableViewCell {
             promoCodeDescriptionLabel.text = data.additionalInformation
         }
         promoCodeActiveSwitch.isOn = data.isToggle
-        toggle = data.toggle
     }
     
     @objc
     func togglePromocode() {
         guard let viewModel else { return }
-        toggle?(promoCodeActiveSwitch.isOn, viewModel.id)
+        viewModel.toggle?(promoCodeActiveSwitch.isOn, viewModel.id)
     }
 }
 

@@ -58,6 +58,10 @@ private extension OrderInfoViewController {
 //MARK: - OrderInfoViewModelDelegate
 extension OrderInfoViewController: OrderInfoViewModelDelegate {
     
+    func openActivePromocode(_ data: [Order.Promocode]) {
+        navigationController?.pushViewController(ActivePromocodeModuleAssembly.build(data, viewModel), animated: true)
+    }
+    
     func cellDidChange(_ data: [OrderInfoTableViewModel]) {
         contentView.setupTable(data)
     }
@@ -73,7 +77,23 @@ extension OrderInfoViewController: OrderInfoViewModelDelegate {
         self.title = title
     }
     
+    func deleteRows(at indexes: [IndexPath], data: [OrderInfoTableViewModel]) {
+        contentView.deleteRows(at: indexes, data: data)
+    }
+    
+    func insertRows(at indexes: [IndexPath], data: [OrderInfoTableViewModel]) {
+        contentView.insertRows(at: indexes, data: data)
+    }
+    
     func reloadCell(at indexes: [IndexPath], data: [OrderInfoTableViewModel]) {
         contentView.reloadCell(at: indexes, data: data)
+    }
+    
+    func activateSnackBar(_ text: String) {
+        contentView.activateSnackBar(text)
+    }
+    
+    func deactivateSnackBar() {
+        contentView.deactivateSnackBar()
     }
 }

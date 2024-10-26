@@ -26,7 +26,7 @@ final class PromoCodeTopItemCell: UITableViewCell {
         return label
     }()
     
-    private var inputPromoCodeButton: UIButton = {
+    private lazy var inputPromoCodeButton: UIButton = {
         let button = UIButton()
         var configuration = UIButton.Configuration.filled()
         configuration.image = .promocode
@@ -35,6 +35,7 @@ final class PromoCodeTopItemCell: UITableViewCell {
         configuration.background.backgroundColor = #colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 0.1)
         configuration.background.cornerRadius = 12
         button.configuration = configuration
+        button.addTarget(self, action: #selector(inputPromocodeTarget), for: .touchUpInside)
         return button
     }()
     
@@ -53,6 +54,12 @@ final class PromoCodeTopItemCell: UITableViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - objc button binding
+    @objc
+    func inputPromocodeTarget() {
+        viewModel?.buttonAction?()
     }
 }
 

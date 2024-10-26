@@ -11,56 +11,60 @@ final class OrderInfoViewModel {
     
     //MARK: - Properties
     private var orderList: Order
+    private var alreadyHide: Int = 0
     private var orderListFormatted: [OrderInfoTableViewModel] {
         didSet {
             var indexes: [IndexPath] = []
+            let newData = filterForHiddenPromoCode(orderListFormatted)
+            let oldData = filterForHiddenPromoCode(oldValue)
+            
             for (index, element) in oldValue.enumerated() {
-                switch element.type {
-                case .topItem(let oldData):
-                    switch orderListFormatted[index].type {
-                    case .topItem(let data):
-                        if oldData != data {
-                            indexes.append(.init(row: index, section: 0))
-                        }
-                        default:
-                            break
-                    }
-                case .promo(let oldData):
-                    switch orderListFormatted[index].type {
-                    case .promo(let data):
-                        if oldData != data {
-                            indexes.append(.init(row: index, section: 0))
-                        }
-                        default:
-                            break
-                    }
-                case .hidePromo(let oldData):
-                    switch orderListFormatted[index].type {
-                    case .hidePromo(let data):
-                        if oldData != data {
-                            indexes.append(.init(row: index, section: 0))
-                        }
-                        default:
-                            break
-                    }
-                case .bottomItem(let oldData):
-                    switch orderListFormatted[index].type {
-                    case .bottomItem(let data):
-                        if oldData != data {
-                            indexes.append(.init(row: index, section: 0))
-                        }
-                        default:
-                            break
-                    }
+                let newElement = orderListFormatted[index]
+                var shouldAppendIndex = false
+                
+                switch (element.type, newElement.type) {
+                case (.topItem(let oldData), .topItem(let data)):
+                    shouldAppendIndex = oldData != data
+                case (.promo(let oldData), .promo(let data)):
+                    shouldAppendIndex = oldData != data
+                case (.hidePromo(let oldData), .hidePromo(let data)):
+                    shouldAppendIndex = oldData != data
+                case (.bottomItem(let oldData), .bottomItem(let data)):
+                    shouldAppendIndex = oldData != data
+                default:
+                    shouldAppendIndex = true
+                }
+                
+                if shouldAppendIndex {
+                    let adjustedIndex = (index < 3) ? index : index - alreadyHide
+                    indexes.append(.init(row: adjustedIndex, section: 0))
                 }
             }
-            delegate?.reloadCell(at: indexes, data: orderListFormatted)
+            
+            if indexes.count == oldValue.count - 1 {
+                delegate?.cellDidChange(newData)
+            } else if newData.count < oldData.count {
+                delegate?.deleteRows(at: indexes, data: newData)
+            } else if newData.count > oldData.count {
+                delegate?.insertRows(at: indexes, data: newData)
+            } else if newData.count == oldData.count {
+                delegate?.reloadCell(at: indexes, data: newData)
+            }
         }
     }
     
     private var errorMessage: String = "" {
         didSet {
             delegate?.showAlert(message: errorMessage)
+        }
+    }
+    
+    private var snackBarText: String = "" {
+        didSet {
+            delegate?.activateSnackBar(snackBarText)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: .init(block: { [weak self] in
+                self?.delegate?.deactivateSnackBar()
+            }))
         }
     }
     
@@ -89,19 +93,104 @@ final class OrderInfoViewModel {
         amountPriceFirstInput()
         title = orderList.screenTitle
     }
+    
+    //MARK: - Set new promocode to viewModel
+    func setViewModelData(_ data: Order.Promocode) {
+        snackBarText = TextConstants.OrderInfoModule.View.popUpText.rawValue
+        var index = 0
+        orderList.availableForActive.forEach {
+            if $0.title == data.title {
+                orderList.availableForActive.remove(at: index)
+            }
+            index += 1
+        }
+        
+        var cellIsHide: Bool = true
+        orderListFormatted.forEach {
+            if case let .hidePromo(data) = $0.type {
+                cellIsHide = data.isHidden
+            }
+        }
+        
+        if cellIsHide {
+            activeAllPromocodes()
+            changeHideButtonTitle()
+            addNewPromoCode(with: data)
+            hidePromoCode()
+        } else {
+            addNewPromoCode(with: data)
+        }
+        changeToggleWhenAddNew()
+    }
 }
 
 //MARK: - Private extension
 private extension OrderInfoViewModel {
     
+    //MARK: - Add new promocode to List
+    func addNewPromoCode(with data: Order.Promocode) {
+        for (index, element) in orderListFormatted.enumerated() {
+            if case .promo(_) = element.type {
+                orderListFormatted.insert(.init(type: .promo(.init(title: data.title, percent: data.percent, date: data.endDate?.formatDate(), additionalInformation: data.info, isToggle: false, toggle: { [weak self] isOn, id in
+                    self?.togglePromocode(isOn, id)
+                }))), at: index)
+                return
+            }
+        }
+    }
+    
+    //MARK: - Change toggle for new promocode
+    func changeToggleWhenAddNew() {
+        var togglePromoCodeCount = 0
+        var index = 0
+        var promoCodeFirstID: UUID?
+        orderListFormatted.forEach {
+            if case let .promo(promoCell) = $0.type {
+                if promoCodeFirstID == nil {
+                    promoCodeFirstID = promoCell.id
+                }
+                if promoCell.isToggle {
+                    togglePromoCodeCount += 1
+                    if togglePromoCodeCount == 2 {
+                        togglePromocode(false, promoCell.id)
+                    }
+                }
+            }
+            index += 1
+        }
+        if let promoCodeFirstID {
+            togglePromocode(true, promoCodeFirstID)
+        }
+    }
+    
+    //MARK: - Show all promocodes
+    func activeAllPromocodes() {
+        var index = 0
+        orderListFormatted.forEach {
+            switch $0.type {
+            case .promo(var promoCell):
+                promoCell.isHidden = false
+                orderListFormatted[index] = .init(type: .promo(promoCell))
+                index += 1
+                break
+            default:
+                index += 1
+                break
+            }
+        }
+    }
+    
     //MARK: - Formatted Top cell function
     func formattedTopCell() {
-        
         orderListFormatted.append(.init(
             type: .topItem(.init(
                 title: TextConstants.OrderInfoModule.TableView.TopItemCell.title.rawValue,
                 info: TextConstants.OrderInfoModule.TableView.TopItemCell.info.rawValue,
-                buttonTitle: TextConstants.OrderInfoModule.TableView.TopItemCell.buttonTitle.rawValue)))
+                buttonTitle: TextConstants.OrderInfoModule.TableView.TopItemCell.buttonTitle.rawValue,
+                buttonAction: { [weak self] in
+                    guard let self else { return }
+                    self.delegate?.openActivePromocode(self.orderList.availableForActive)
+                })))
         )
     }
     
@@ -122,8 +211,60 @@ private extension OrderInfoViewModel {
     //MARK: - Formatted hide button function
     func formattedHidePromoCode() {
         orderListFormatted.append(.init(type: .hidePromo(.init(
-            title: TextConstants.OrderInfoModule.TableView.HidePromoCodeCell.title.rawValue
+            title: TextConstants.OrderInfoModule.TableView.HidePromoCodeCell.title.rawValue,
+            hidePromoCode: { [weak self] in
+                self?.hidePromoCode()
+            },
+            isHidden: false
         ))))
+    }
+    
+    //MARK: - PromoCode hide function
+    func hidePromoCode() {
+        var index = 0
+        var countOfPromo = 0
+        
+        changeHideButtonTitle()
+        alreadyHide = 0
+        orderListFormatted.forEach {
+            switch $0.type {
+            case .promo(var promoCell):
+                if countOfPromo > 2 {
+                    promoCell.isHidden = !promoCell.isHidden
+                    orderListFormatted[index] = .init(type: .promo(promoCell))
+                    if promoCell.isHidden {
+                        alreadyHide += 1
+                    }
+                }
+                countOfPromo += 1
+                index += 1
+            default:
+                index += 1
+                break
+            }
+        }
+    }
+    
+    //MARK: - Change hide button title
+    func changeHideButtonTitle() {
+        var index = 0
+        orderListFormatted.forEach {
+            switch $0.type {
+            case .hidePromo(var hidePromoCell):
+                hidePromoCell.isHidden = !hidePromoCell.isHidden
+                switch hidePromoCell.isHidden {
+                case true:
+                    hidePromoCell.title = "Показать промокоды"
+                case false:
+                    hidePromoCell.title = "Скрыть промокоды"
+                }
+                orderListFormatted[index] = .init(type: .hidePromo(hidePromoCell))
+                index += 1
+            default:
+                index += 1
+                break
+            }
+        }
     }
     
     //MARK: - amountPrice in bottom cell
@@ -152,13 +293,10 @@ private extension OrderInfoViewModel {
                 totalPrice -= paymentDiscount
                 
                 promocodes.forEach {
-                    switch $0.type {
-                    case .promo(let promoCell):
+                    if case let .promo(promoCell) = $0.type {
                         let discountAmount = totalPriceOutput * (Double(promoCell.percent) / 100)
                         totalPrice -= discountAmount
                         promoCodePrice += discountAmount
-                    default:
-                        break
                     }
                 }
                 
@@ -229,13 +367,10 @@ private extension OrderInfoViewModel {
                 return false
             }
         }.count
-        changeToggle(isOn, id)
-        amountPrice(isOn, id)
         
         if numberOfPromocodes >= 2 && isOn {
             errorMessage = "Нельзя применить больше 2х промокодов"
             changeToggle(!isOn, id)
-            amountPrice(!isOn, id)
         } else {
             changeToggle(isOn, id)
             amountPrice(isOn, id)
@@ -244,15 +379,15 @@ private extension OrderInfoViewModel {
 
     func changeToggle(_ isOn: Bool,_ id: UUID) {
         for (index, item) in orderListFormatted.enumerated() {
-            switch item.type {
-            case .promo(var promoCell):
+            if case var .promo(promoCell) = item.type {
                 if promoCell.id == id {
-                    promoCell.isToggle = isOn
-                    orderListFormatted[index] = OrderInfoTableViewModel(type: .promo(promoCell))
+                    if promoCell.isToggle != isOn {
+                        promoCell.isToggle = isOn
+                        orderListFormatted[index] = OrderInfoTableViewModel(type: .promo(promoCell))
+                    } else {
+                        delegate?.reloadCell(at: [.init(row: index, section: 0)], data: filterForHiddenPromoCode(orderListFormatted))
+                    }
                 }
-                break
-            default:
-                break
             }
         }
     }
@@ -277,5 +412,20 @@ private extension OrderInfoViewModel {
         }
         
         return "Цена за \(quantity) \(suffix)"
+    }
+    
+    //MARK: - filter hidden promoCode
+    func filterForHiddenPromoCode(_ array: [OrderInfoTableViewModel]) -> [OrderInfoTableViewModel]{
+        array.filter {
+            switch $0.type {
+            case .promo(let data):
+                if data.isHidden {
+                    return false
+                }
+                return true
+            default:
+                return true
+            }
+        }
     }
 }

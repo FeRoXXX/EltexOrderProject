@@ -8,6 +8,19 @@
 import UIKit
 
 enum TextConstants {
+    enum ActivatePromocodeModule {
+        enum ActivatePromocodeViewController: String {
+            case title = "Применить промокод"
+        }
+        
+        enum ActivatePromocodeView: String {
+            case buttonText = "Применить"
+        }
+        
+        enum PromoCodeTextField: String {
+            case textFieldTitle = "Введите код"
+        }
+    }
     
     enum OrderInfoModule {
         enum TableView {
@@ -46,7 +59,10 @@ enum TextConstants {
                     return attributedString
                 }
             }
-            
+        }
+        
+        enum View: String {
+            case popUpText = "Промокод активирован"
         }
     }
 }

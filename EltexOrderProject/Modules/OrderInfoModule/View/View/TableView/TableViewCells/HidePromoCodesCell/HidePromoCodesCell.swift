@@ -11,11 +11,12 @@ import SnapKit
 final class HidePromoCodesCell: UITableViewCell {
     
     //MARK: - Properties
-    private var hideButton: UIButton = {
+    private lazy var hideButton: UIButton = {
         let button = UIButton()
         var configuration = UIButton.Configuration.plain()
         configuration.baseForegroundColor = #colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)
         button.configuration = configuration
+        button.addTarget(self, action: #selector(hide), for: .touchUpInside)
         return button
     }()
     
@@ -34,6 +35,12 @@ final class HidePromoCodesCell: UITableViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Hide promoCode button target
+    @objc
+    func hide() {
+        viewModel?.hidePromoCode?()
     }
 }
 
@@ -61,7 +68,6 @@ private extension HidePromoCodesCell {
     //MARK: - Setup data function
     func updateUI() {
         guard let data = viewModel else { return }
-        
         hideButton.configuration?.title = data.title
     }
 }

@@ -69,7 +69,9 @@ private extension ActivePromocodeViewModel {
         for element in promoCodesList {
             if element.title == promoCode {
                 previousViewModel?.setViewModelData(element)
-                delegate?.closeWindow()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: .init(block: { [weak self] in
+                    self?.delegate?.closeWindow()
+                }))
                 return
             }
         }

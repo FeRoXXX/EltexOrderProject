@@ -36,11 +36,10 @@ final class OrderInfoViewModel {
                 }
                 
                 if shouldAppendIndex {
-                    let adjustedIndex = (index < 3) ? index : index - alreadyHide
+                    let adjustedIndex = (index <= 3) ? index : index - alreadyHide
                     indexes.append(.init(row: adjustedIndex, section: 0))
                 }
             }
-            
             if indexes.count == oldValue.count - 1 {
                 delegate?.cellDidChange(newData)
             } else if newData.count < oldData.count {

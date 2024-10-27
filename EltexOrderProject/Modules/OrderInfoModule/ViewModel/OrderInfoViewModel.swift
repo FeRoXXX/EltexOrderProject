@@ -117,12 +117,11 @@ final class OrderInfoViewModel {
         }
         
         if cellIsHide {
-            activeAllPromocodes()
             changeHideButtonTitle()
             alreadyHide = 0
             addNewPromoCode(with: data)
             changeToggleWhenAddNew()
-            hidePromoCode()
+            changeHideButtonTitle()
         } else {
             alreadyHide = 0
             addNewPromoCode(with: data)
@@ -218,7 +217,7 @@ private extension OrderInfoViewModel {
         orderListFormatted.append(.init(type: .hidePromo(.init(
             title: TextConstants.OrderInfoModule.TableView.HidePromoCodeCell.title.rawValue,
             hidePromoCode: { [weak self] in
-                self?.hidePromoCode()
+                self?.changeHideButtonTitle()
             },
             isHidden: false
         ))))
@@ -236,7 +235,6 @@ private extension OrderInfoViewModel {
             return false
         }.count
         
-        changeHideButtonTitle()
         alreadyHide = 0
         orderListFormatted.forEach {
             switch $0.type {
@@ -273,8 +271,11 @@ private extension OrderInfoViewModel {
                 switch hidePromoCell.isHidden {
                 case true:
                     hidePromoCell.title = "Показать промокоды"
+                    hidePromoCode()
                 case false:
                     hidePromoCell.title = "Скрыть промокоды"
+                    alreadyHide = 0
+                    activeAllPromocodes()
                 }
                 orderListFormatted[index] = .init(type: .hidePromo(hidePromoCell))
                 index += 1
@@ -396,6 +397,7 @@ private extension OrderInfoViewModel {
     }
 
     func changeToggle(_ isOn: Bool,_ id: UUID) {
+        var hideIndex = 0
         for (index, item) in orderListFormatted.enumerated() {
             if case var .promo(promoCell) = item.type {
                 if promoCell.id == id {
@@ -403,8 +405,11 @@ private extension OrderInfoViewModel {
                         promoCell.isToggle = isOn
                         orderListFormatted[index] = OrderInfoTableViewModel(type: .promo(promoCell))
                     } else {
-                        delegate?.reloadCell(at: [.init(row: index, section: 0)], data: filterForHiddenPromoCode(orderListFormatted))
+                        delegate?.reloadCell(at: [.init(row: index - hideIndex, section: 0)], data: filterForHiddenPromoCode(orderListFormatted))
                     }
+                }
+                if promoCell.isHidden {
+                    hideIndex += 1
                 }
             }
         }

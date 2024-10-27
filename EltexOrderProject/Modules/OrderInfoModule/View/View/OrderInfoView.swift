@@ -93,8 +93,6 @@ extension OrderInfoView {
     }
     
     func reloadCell(at indexes: [IndexPath], data: [OrderInfoTableViewModel]) {
-        print(indexes)
-        print(data)
         contentTableView.setupData(data)
         contentTableView.reloadRows(at: indexes, with: .automatic)
     }

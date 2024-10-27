@@ -36,7 +36,12 @@ final class OrderInfoViewModel {
                 }
                 
                 if shouldAppendIndex {
-                    let adjustedIndex = (index <= 3) ? index : index - alreadyHide
+                    var adjustedIndex = 0
+                    if oldData.count != newData.count {
+                        adjustedIndex =  index - alreadyHide
+                    } else {
+                        adjustedIndex =  (index < orderListFormatted.count - 2) ? index : index - alreadyHide
+                    }
                     indexes.append(.init(row: adjustedIndex, section: 0))
                 }
             }
@@ -114,12 +119,15 @@ final class OrderInfoViewModel {
         if cellIsHide {
             activeAllPromocodes()
             changeHideButtonTitle()
+            alreadyHide = 0
             addNewPromoCode(with: data)
+            changeToggleWhenAddNew()
             hidePromoCode()
         } else {
+            alreadyHide = 0
             addNewPromoCode(with: data)
+            changeToggleWhenAddNew()
         }
-        changeToggleWhenAddNew()
     }
 }
 
@@ -141,10 +149,9 @@ private extension OrderInfoViewModel {
     //MARK: - Change toggle for new promocode
     func changeToggleWhenAddNew() {
         var togglePromoCodeCount = 0
-        var index = 0
         var promoCodeFirstID: UUID?
-        orderListFormatted.forEach {
-            if case let .promo(promoCell) = $0.type {
+        for element in orderListFormatted {
+            if case let .promo(promoCell) = element.type {
                 if promoCodeFirstID == nil {
                     promoCodeFirstID = promoCell.id
                 }
@@ -155,7 +162,6 @@ private extension OrderInfoViewModel {
                     }
                 }
             }
-            index += 1
         }
         if let promoCodeFirstID {
             togglePromocode(true, promoCodeFirstID)
@@ -221,21 +227,34 @@ private extension OrderInfoViewModel {
     //MARK: - PromoCode hide function
     func hidePromoCode() {
         var index = 0
+        var activePromo = 0
         var countOfPromo = 0
+        let activePromoCount = orderListFormatted.filter {
+            if case let .promo(data) = $0.type {
+                return data.isToggle
+            }
+            return false
+        }.count
         
         changeHideButtonTitle()
         alreadyHide = 0
         orderListFormatted.forEach {
             switch $0.type {
             case .promo(var promoCell):
-                if countOfPromo > 2 {
-                    promoCell.isHidden = !promoCell.isHidden
-                    orderListFormatted[index] = .init(type: .promo(promoCell))
-                    if promoCell.isHidden {
-                        alreadyHide += 1
+                if promoCell.isToggle {
+                    countOfPromo += 1
+                } else {
+                    if 3 - activePromoCount == activePromo {
+                        promoCell.isHidden = !promoCell.isHidden
+                        orderListFormatted[index] = .init(type: .promo(promoCell))
+                        if promoCell.isHidden {
+                            alreadyHide += 1
+                        }
+                    } else {
+                        countOfPromo += 1
+                        activePromo += 1
                     }
                 }
-                countOfPromo += 1
                 index += 1
             default:
                 index += 1

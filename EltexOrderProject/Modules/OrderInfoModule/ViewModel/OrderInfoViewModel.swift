@@ -271,13 +271,14 @@ private extension OrderInfoViewModel {
                 switch hidePromoCell.isHidden {
                 case true:
                     hidePromoCell.title = "Показать промокоды"
+                    orderListFormatted[index] = .init(type: .hidePromo(hidePromoCell))
                     hidePromoCode()
                 case false:
                     hidePromoCell.title = "Скрыть промокоды"
+                    orderListFormatted[index] = .init(type: .hidePromo(hidePromoCell))
                     alreadyHide = 0
                     activeAllPromocodes()
                 }
-                orderListFormatted[index] = .init(type: .hidePromo(hidePromoCell))
                 index += 1
             default:
                 index += 1

@@ -29,7 +29,13 @@ final class InputProductsViewController: UIViewController {
             .init(title: "4300162112534", percent: 5, endDate: Date(), info: nil, active: false)
         ],
         availableForActive: [
-            .init(title: "Buks", percent: 5, endDate: Date(), info: "Секретны промокод", active: true)
+            .init(title: "Buks", percent: 5, endDate: Date(), info: "Секретный промокод", active: true),
+            .init(title: "TOPSALE", percent: 5, endDate: Date(), info: "Секретный промокод", active: true),
+            .init(title: "LOWPRICE", percent: 5, endDate: Date(), info: "Секретный промокод", active: true),
+            .init(title: "ENCHANT", percent: 5, endDate: Date(), info: "Секретный промокод", active: true),
+            .init(title: "SWIFT", percent: 5, endDate: Date(), info: "Секретный промокод", active: true),
+            .init(title: "SECRET", percent: 5, endDate: Date(), info: "Секретный промокод", active: true),
+            .init(title: "1204221", percent: 90, endDate: Date(), info: "Секретный промокод", active: true)
         ],
         products: [.init(price: 10000, title: ""), .init(price: 15000, title: "")],
         paymentDiscount: 5000,

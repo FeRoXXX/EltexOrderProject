@@ -23,7 +23,7 @@ final class PromoCodeTextField: UIView {
     private lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [verticalInternalStackView, clearButton])
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         stackView.layoutMargins = .init(top: 8, left: 12, bottom: 8, right: 12)
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
@@ -128,12 +128,15 @@ private extension PromoCodeTextField {
             make.top.equalToSuperview().inset(8)
         }
         
+        clearButton.snp.makeConstraints { make in
+            make.width.equalTo(20)
+        }
+        
         alertLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(12)
             make.bottom.equalToSuperview()
         }
         
-        clearButton.snp.contentCompressionResistanceHorizontalPriority = 752
     }
 }
 

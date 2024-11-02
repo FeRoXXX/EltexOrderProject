@@ -10,4 +10,5 @@ import Foundation
 protocol ProductFeedbackViewModelDelegate: AnyObject {
     
     func updateData(_ data: [ProductFeedbackTableModel])
+    func setupTableViewModel(_ data: ProductFeedbackModel?)
 }

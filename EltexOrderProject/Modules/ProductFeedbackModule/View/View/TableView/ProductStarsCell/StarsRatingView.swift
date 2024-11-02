@@ -48,6 +48,14 @@ final class StarsRatingView: UIView {
         return imageView
     }()
     
+    //MARK: - Public properties
+    
+    var viewModel: ProductFeedbackTableModel.DataModel.ProductStarsCell.StarsRatingView? {
+        didSet {
+            updateData()
+        }
+    }
+    
     //MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -60,7 +68,6 @@ final class StarsRatingView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 //MARK: - Private extension
@@ -93,41 +100,50 @@ private extension StarsRatingView {
     
     @objc
     func showMoreActions(touch: UITapGestureRecognizer) {
-
-        let touchPoint = touch.location(in: self)
-        switch touchPoint.x {
-        case 0..<starFirst.frame.width + 8:
+        viewModel?.touchLocation?(touch.location(in: touch.view).x, starFirst.frame.width)
+    }
+    
+    //MARK: - Update data function
+    
+    func updateData() {
+        guard let viewModel else { return }
+        switch viewModel.currentRating {
+        case .first:
             starFirst.image = .starFill
             starSecond.image = .star
             starThird.image = .star
             starFourth.image = .star
             starFifth.image = .star
-        case starFirst.frame.width..<(starFirst.frame.width + 8)*2:
+        case .second:
             starFirst.image = .starFill
             starSecond.image = .starFill
             starThird.image = .star
             starFourth.image = .star
             starFifth.image = .star
-        case starFirst.frame.width*2..<(starFirst.frame.width + 8)*3:
+        case .third:
             starFirst.image = .starFill
             starSecond.image = .starFill
             starThird.image = .starFill
             starFourth.image = .star
             starFifth.image = .star
-        case starFirst.frame.width*3..<(starFirst.frame.width + 8)*4:
+        case .fourth:
             starFirst.image = .starFill
             starSecond.image = .starFill
             starThird.image = .starFill
             starFourth.image = .starFill
             starFifth.image = .star
-        case starFirst.frame.width*4..<(starFirst.frame.width + 8)*5:
+        case .fifth:
             starFirst.image = .starFill
             starSecond.image = .starFill
             starThird.image = .starFill
             starFourth.image = .starFill
             starFifth.image = .starFill
-        default:
-            break
+        case .none:
+            starFirst.image = .star
+            starSecond.image = .star
+            starThird.image = .star
+            starFourth.image = .star
+            starFifth.image = .star
         }
     }
 }

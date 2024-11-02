@@ -15,7 +15,7 @@ final class CheckBoxView: UIView {
     private let checkBoxImageView: UIImageView = {
         let checkBoxImageView = UIImageView()
         checkBoxImageView.image = .checkbox
-        checkBoxImageView.contentMode = .scaleAspectFit
+        checkBoxImageView.contentMode = .scaleToFill
         return checkBoxImageView
     }()
     
@@ -39,6 +39,7 @@ final class CheckBoxView: UIView {
     init() {
         super.init(frame: .zero)
         setupUI()
+        setupGesture()
     }
     
     @available(*, unavailable)
@@ -67,6 +68,7 @@ private extension CheckBoxView {
         checkBoxImageView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(4)
             make.leading.equalToSuperview().inset(14)
+            make.height.width.equalTo(20)
         }
         
         additionalTextLabel.snp.makeConstraints { make in
@@ -83,5 +85,20 @@ private extension CheckBoxView {
     
     func updateData() {
         additionalTextLabel.text = viewModel?.title
+        checkBoxImageView.image = UIImage(named: viewModel?.image ?? "checkbox")
+    }
+    
+    //MARK: - Setup gesture function
+    
+    func setupGesture() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(checkBoxTapped))
+        addGestureRecognizer(gestureRecognizer)
+    }
+    
+    //MARK: - Gesture recognizer function
+    
+    @objc
+    func checkBoxTapped() {
+        viewModel?.checkBoxTapped?(viewModel?.isActive ?? false)
     }
 }

@@ -9,8 +9,8 @@ import UIKit
 
 final class ProductFeedbackModuleAssembly {
     
-    static func build() -> UIViewController {
-        let viewModel = ProductFeedbackViewModel()
+    static func build(data: ProductTableModel) -> UIViewController {
+        let viewModel = ProductFeedbackViewModel(receivedData: data)
         let controller = ProductFeedbackViewController(viewModel: viewModel)
         return controller
     }

@@ -42,7 +42,7 @@ final class ProductStarsCell: UITableViewCell {
     
     var viewModel: ProductFeedbackTableModel.DataModel.ProductStarsCell? {
         didSet {
-            
+            updateData()
         }
     }
     
@@ -90,7 +90,12 @@ private extension ProductStarsCell {
     
     func updateData() {
         starsLabel.text = viewModel?.title
-        starsLabel.textColor = .black
+        if viewModel != nil {
+            if viewModel?.title != "Ваша оценка" {
+                starsLabel.textColor = .black
+            }
+            starsRatingView.viewModel = viewModel?.rating
+        }
     }
 }
 

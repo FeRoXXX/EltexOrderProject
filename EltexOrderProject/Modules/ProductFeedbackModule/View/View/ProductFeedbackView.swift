@@ -37,6 +37,7 @@ private extension ProductFeedbackView {
     //MARK: - UI initialization functions
     
     func setupUI() {
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addSubviews()
         setupConstraints()
     }
@@ -60,5 +61,11 @@ extension ProductFeedbackView {
     
     func setupData(_ data: [ProductFeedbackTableModel]) {
         tableView.data = data
+    }
+    
+    //MARK: - Setup table viewModel
+    
+    func setupTableViewModel(_ data: ProductFeedbackModel?) {
+        tableView.viewModel = data
     }
 }

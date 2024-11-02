@@ -20,8 +20,10 @@ final class ReviewTextCell: UITableViewCell {
         return view
     }()
     
-    private let textField: UITextField = {
+    private lazy var textField: UITextField = {
         let textField = UITextField()
+        textField.returnKeyType = .next
+        textField.delegate = self
         return textField
     }()
     
@@ -78,6 +80,32 @@ private extension ReviewTextCell {
     
     func updateData() {
         textField.placeholder = viewModel?.placeholder
+        
+        //print(textField.text)
+        
+        switch viewModel?.isFirstResponder.value ?? false {
+        case true:
+            //DispatchQueue.main.async(execute: DispatchWorkItem(block: {
+                self.textField.becomeFirstResponder()
+            //}))
+        case false:
+            textField.resignFirstResponder()
+        }
+    }
+}
+
+//MARK: - UITextFieldDelegate
+
+extension ReviewTextCell: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        viewModel?.isFirstResponder.value = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        viewModel?.isFirstResponder.value = false
+        textField.resignFirstResponder()
+        return false
     }
 }
 

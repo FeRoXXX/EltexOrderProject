@@ -24,9 +24,10 @@ final class FeedbackViewModel {
     
     private var navigation: Navigation = .currentController {
         didSet {
-            delegate?.useNavigation(navigation)
+            delegate?.useNavigation(navigation, data: selectData)
         }
     }
+    private var selectData: ProductTableModel?
     
     weak var delegate: FeedbackViewModelDelegate? {
         didSet {
@@ -43,6 +44,8 @@ final class FeedbackViewModel {
     //MARK: - Public methods
     
     func cellDidChange(_ index: Int) {
+        selectData = data[index]
         navigation = .nextController
+        selectData = nil
     }
 }

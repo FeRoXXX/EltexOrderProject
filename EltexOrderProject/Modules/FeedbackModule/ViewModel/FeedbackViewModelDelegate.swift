@@ -9,5 +9,5 @@ import Foundation
 
 protocol FeedbackViewModelDelegate: AnyObject {
     func setupData(_ data: [ProductTableModel])
-    func useNavigation(_ navigation: Navigation)
+    func useNavigation(_ navigation: Navigation, data: ProductTableModel?)
 }

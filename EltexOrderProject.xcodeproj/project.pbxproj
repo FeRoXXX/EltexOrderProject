@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2762B1E72CD4C42B00D0C3E0 /* StarsErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762B1E62CD4C42B00D0C3E0 /* StarsErrorCell.swift */; };
+		2762B1EB2CD4D05100D0C3E0 /* AddPhotoOrVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762B1EA2CD4D05100D0C3E0 /* AddPhotoOrVideoCell.swift */; };
+		2762B1ED2CD4D3F700D0C3E0 /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762B1EC2CD4D3F700D0C3E0 /* PhotoCollectionView.swift */; };
+		2762B1F02CD4D40E00D0C3E0 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2762B1EF2CD4D40E00D0C3E0 /* PhotoCollectionViewCell.swift */; };
 		279F6A352CCB77AB0002892F /* ActivatePromocodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A342CCB77AB0002892F /* ActivatePromocodeViewController.swift */; };
 		279F6A372CCB77B40002892F /* ActivatePromocodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A362CCB77B40002892F /* ActivatePromocodeView.swift */; };
 		279F6A392CCB79E20002892F /* PromoCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279F6A382CCB79E20002892F /* PromoCodeTextField.swift */; };
@@ -60,6 +64,8 @@
 		27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */; };
 		27EC9F9C2CBFAD5D00BEF768 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27EC9F9B2CBFAD5D00BEF768 /* SnapKit */; };
 		27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */; };
+		27F76BB42CD6089800DFAAE7 /* ProductFeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F76BB32CD6089800DFAAE7 /* ProductFeedbackModel.swift */; };
+		27FEF7942CD635E500138B0D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FEF7932CD635E500138B0D /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +82,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2762B1E62CD4C42B00D0C3E0 /* StarsErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsErrorCell.swift; sourceTree = "<group>"; };
+		2762B1EA2CD4D05100D0C3E0 /* AddPhotoOrVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoOrVideoCell.swift; sourceTree = "<group>"; };
+		2762B1EC2CD4D3F700D0C3E0 /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
+		2762B1EF2CD4D40E00D0C3E0 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		279F6A342CCB77AB0002892F /* ActivatePromocodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatePromocodeViewController.swift; sourceTree = "<group>"; };
 		279F6A362CCB77B40002892F /* ActivatePromocodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatePromocodeView.swift; sourceTree = "<group>"; };
 		279F6A382CCB79E20002892F /* PromoCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTextField.swift; sourceTree = "<group>"; };
@@ -130,6 +140,8 @@
 		27EC9F952CBF870400BEF768 /* OrderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoViewController.swift; sourceTree = "<group>"; };
 		27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoView.swift; sourceTree = "<group>"; };
 		27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTableViewCell.swift; sourceTree = "<group>"; };
+		27F76BB32CD6089800DFAAE7 /* ProductFeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFeedbackModel.swift; sourceTree = "<group>"; };
+		27FEF7932CD635E500138B0D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +162,32 @@
 				27B35EDA2CD13B5000981916 /* ProductTableView.swift */,
 			);
 			path = TableView;
+			sourceTree = "<group>";
+		};
+		2762B1E82CD4C43300D0C3E0 /* StarsErrorCell */ = {
+			isa = PBXGroup;
+			children = (
+				2762B1E62CD4C42B00D0C3E0 /* StarsErrorCell.swift */,
+			);
+			path = StarsErrorCell;
+			sourceTree = "<group>";
+		};
+		2762B1E92CD4D03700D0C3E0 /* AddPhotoOrVideoCell */ = {
+			isa = PBXGroup;
+			children = (
+				2762B1EE2CD4D3FA00D0C3E0 /* PhotoCollectionView */,
+				2762B1EA2CD4D05100D0C3E0 /* AddPhotoOrVideoCell.swift */,
+			);
+			path = AddPhotoOrVideoCell;
+			sourceTree = "<group>";
+		};
+		2762B1EE2CD4D3FA00D0C3E0 /* PhotoCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2762B1EC2CD4D3F700D0C3E0 /* PhotoCollectionView.swift */,
+				2762B1EF2CD4D40E00D0C3E0 /* PhotoCollectionViewCell.swift */,
+			);
+			path = PhotoCollectionView;
 			sourceTree = "<group>";
 		};
 		279F6A2F2CCB77650002892F /* ActivatePromocodeModule */ = {
@@ -421,6 +459,7 @@
 				27E210A22CD27953000F6896 /* ViewModel */,
 				27E210A12CD2794F000F6896 /* Model */,
 				27E210A02CD2794B000F6896 /* View */,
+				27FEF7932CD635E500138B0D /* Observable.swift */,
 			);
 			path = ProductFeedbackModule;
 			sourceTree = "<group>";
@@ -438,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				27D5F6F42CD33B6700C63184 /* ProductFeedbackTableModel.swift */,
+				27F76BB32CD6089800DFAAE7 /* ProductFeedbackModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -479,6 +519,8 @@
 		27E210AA2CD27CC0000F6896 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				2762B1E92CD4D03700D0C3E0 /* AddPhotoOrVideoCell */,
+				2762B1E82CD4C43300D0C3E0 /* StarsErrorCell */,
 				27AD85162CD3CF8300C9FFA2 /* SendReviewCell */,
 				27AD85132CD3B10D00C9FFA2 /* ReviewTextCell */,
 				27C15E052CD39D63008FF36C /* AddPhotoOrVideoEmptyCell */,
@@ -692,10 +734,12 @@
 				27D5F6F32CD339BB00C63184 /* ProductInfoCell.swift in Sources */,
 				27CED8442CC1352200FE6E66 /* ThreeItemStack.swift in Sources */,
 				279F6A352CCB77AB0002892F /* ActivatePromocodeViewController.swift in Sources */,
+				27F76BB42CD6089800DFAAE7 /* ProductFeedbackModel.swift in Sources */,
 				279F6A372CCB77B40002892F /* ActivatePromocodeView.swift in Sources */,
 				27E210A92CD27995000F6896 /* ProductFeedbackViewController.swift in Sources */,
 				27AD851A2CD3D0BF00C9FFA2 /* CheckBoxView.swift in Sources */,
 				27B35ED72CD139E300981916 /* FeedbackViewController.swift in Sources */,
+				27FEF7942CD635E500138B0D /* Observable.swift in Sources */,
 				27CED8332CC0E28100FE6E66 /* PromoCodeBottomItemCell.swift in Sources */,
 				27AD85152CD3B13000C9FFA2 /* ReviewTextCell.swift in Sources */,
 				27CED84E2CC2B98800FE6E66 /* OrderInfoModuleAssembly.swift in Sources */,
@@ -712,7 +756,9 @@
 				27D5F6F72CD33DE500C63184 /* ProductFeedbackViewModelDelegate.swift in Sources */,
 				27CED83A2CC11F3600FE6E66 /* OrderInfoModel.swift in Sources */,
 				27A09C3D2CD22DC300377AFB /* ProductTableViewModel.swift in Sources */,
+				2762B1EB2CD4D05100D0C3E0 /* AddPhotoOrVideoCell.swift in Sources */,
 				27CED83C2CC1261E00FE6E66 /* OrderInfoTableViewModel.swift in Sources */,
+				2762B1F02CD4D40E00D0C3E0 /* PhotoCollectionViewCell.swift in Sources */,
 				27D5F6FB2CD3419100C63184 /* ProductFeedbackModuleAssembly.swift in Sources */,
 				27CED8482CC278A200FE6E66 /* OrderInfoViewModelDelegate.swift in Sources */,
 				27EC9F7D2CBF823100BEF768 /* SceneDelegate.swift in Sources */,
@@ -722,6 +768,8 @@
 				27B35ED92CD13A4A00981916 /* FeedbackView.swift in Sources */,
 				27D5F6F52CD33B6700C63184 /* ProductFeedbackTableModel.swift in Sources */,
 				27A09C612CD243DD00377AFB /* FeedbackViewModelDelegate.swift in Sources */,
+				2762B1E72CD4C42B00D0C3E0 /* StarsErrorCell.swift in Sources */,
+				2762B1ED2CD4D3F700D0C3E0 /* PhotoCollectionView.swift in Sources */,
 				279F6A3D2CCBAD100002892F /* ActivePromocodeViewModelDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

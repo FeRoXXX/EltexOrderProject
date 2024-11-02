@@ -66,12 +66,13 @@ extension FeedbackViewController: FeedbackViewModelDelegate {
         feedbackView.setupData(data)
     }
     
-    func useNavigation(_ navigation: Navigation) {
+    func useNavigation(_ navigation: Navigation, data: ProductTableModel? = nil) {
         switch navigation {
         case .currentController:
             return
         case .nextController:
-            self.navigationController?.pushViewController(ProductFeedbackModuleAssembly.build(), animated: true)
+            guard let data else { return }
+            self.navigationController?.pushViewController(ProductFeedbackModuleAssembly.build(data: data), animated: true)
         }
     }
 }

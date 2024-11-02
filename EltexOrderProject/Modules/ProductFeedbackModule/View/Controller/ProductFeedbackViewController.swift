@@ -65,4 +65,8 @@ extension ProductFeedbackViewController: ProductFeedbackViewModelDelegate {
     func updateData(_ data: [ProductFeedbackTableModel]) {
         contentView.setupData(data)
     }
+    
+    func setupTableViewModel(_ data: ProductFeedbackModel?) {
+        contentView.setupTableViewModel(data)
+    }
 }

@@ -71,6 +71,7 @@ final class AddPhotoOrVideoEmptyCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        setupGesture()
     }
     
     @available(*, unavailable)
@@ -107,11 +108,25 @@ private extension AddPhotoOrVideoEmptyCell {
         }
     }
     
+    //MARK: - Setup gesture recognizer
+    
+    func setupGesture() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addPhoto))
+        addGestureRecognizer(gestureRecognizer)
+    }
+    
     //MARK: - update data function
     
     func updateData() {
         titleLabel.text = viewModel?.title
         descriptionLabel.text = viewModel?.description
+    }
+    
+    //MARK: - Gesture recognizer function
+    
+    @objc
+    func addPhoto() {
+        viewModel?.cellIsTapped?()
     }
 }
 

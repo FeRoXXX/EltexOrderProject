@@ -75,6 +75,7 @@ final class StarsRatingView: UIView {
 private extension StarsRatingView {
     
     //MARK: - UI initialization functions
+    
     func setupUI() {
         addSubviews()
         setupConstraints()

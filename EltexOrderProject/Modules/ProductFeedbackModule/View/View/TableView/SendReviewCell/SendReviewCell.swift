@@ -17,12 +17,13 @@ final class SendReviewCell: UITableViewCell {
         return checkBoxView
     }()
     
-    private let sendButton: UIButton = {
+    private lazy var sendButton: UIButton = {
         let button = UIButton()
         var configuration = UIButton.Configuration.filled()
         configuration.background.backgroundColor = #colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)
         configuration.background.cornerRadius = 12
         button.configuration = configuration
+        button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -98,7 +99,31 @@ private extension SendReviewCell {
     func updateData() {
         checkBoxView.viewModel = viewModel?.checkBox
         sendButton.configuration?.title = viewModel?.buttonTitle
-        userAgreementLabel.text = viewModel?.userAgreement
+        guard let viewModel else { return }
+        userAgreementLabel.attributedText = styledText(from: viewModel.userAgreement, highlightedText: viewModel.userAgreementHighlighted)
+    }
+    
+    //MARK: - Button trigger function
+    
+    @objc
+    func sendButtonTapped() {
+        viewModel?.sendButtonIsTapped?()
+    }
+    
+    //MARK: - Style user agreement text
+    
+    func styledText(from text: String, highlightedText: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.foregroundColor, value: #colorLiteral(red: 0.551900208, green: 0.5519001484, blue: 0.5519001484, alpha: 1), range: .init(location: 0, length: attributedString.length))
+        
+        if let range = text.range(of: highlightedText) {
+            let nsRange = NSRange(range, in: text)
+            
+            attributedString.addAttribute(.foregroundColor, value: #colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1), range: nsRange)
+            attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: nsRange)
+        }
+        
+        return attributedString
     }
 }
 

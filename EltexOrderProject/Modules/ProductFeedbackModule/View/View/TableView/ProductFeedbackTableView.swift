@@ -49,6 +49,8 @@ final class ProductFeedbackTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - layoutSubviews
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         if layoutFlag {
@@ -57,6 +59,8 @@ final class ProductFeedbackTableView: UITableView {
             layoutFlag = !layoutFlag
         }
     }
+    
+    //MARK: - deinit
     
     deinit {
         data = []

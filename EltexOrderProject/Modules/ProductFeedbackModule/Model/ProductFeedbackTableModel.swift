@@ -101,7 +101,9 @@ struct ProductFeedbackTableModel {
         struct SendReviewCell: Equatable {
             let buttonTitle: String
             let userAgreement: String
+            let userAgreementHighlighted: String
             var checkBox: CheckBoxView
+            var sendButtonIsTapped: (()->Void)?
             
             struct CheckBoxView: Equatable {
                 let title: String
@@ -112,6 +114,10 @@ struct ProductFeedbackTableModel {
                 static func == (lhs: ProductFeedbackTableModel.DataModel.SendReviewCell.CheckBoxView, rhs: ProductFeedbackTableModel.DataModel.SendReviewCell.CheckBoxView) -> Bool {
                     return lhs.title == rhs.title && lhs.image == rhs.image && lhs.isActive == rhs.isActive
                 }
+            }
+            
+            static func == (lhs: ProductFeedbackTableModel.DataModel.SendReviewCell, rhs: ProductFeedbackTableModel.DataModel.SendReviewCell) -> Bool {
+                return lhs.buttonTitle == rhs.buttonTitle && lhs.userAgreement == rhs.userAgreement && lhs.checkBox == rhs.checkBox
             }
         }
         

@@ -38,6 +38,7 @@ final class ProductFeedbackView: UIView {
     }
     
     //MARK: - Keyboard visible functions
+    
     @objc
     func keyboardWillAppear(notification: NSNotification) {
         guard let userInfo = notification.userInfo,

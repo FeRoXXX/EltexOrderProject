@@ -45,6 +45,7 @@ final class ProductTableView: UITableView {
 }
 
 //MARK: - TableViewProtocols
+
 extension ProductTableView: TableViewProtocols {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

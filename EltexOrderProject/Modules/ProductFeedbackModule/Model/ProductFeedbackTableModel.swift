@@ -89,7 +89,7 @@ struct ProductFeedbackTableModel {
         struct ReviewTextCell: Equatable {
             
             let placeholder: String
-            var isFirstResponder: Observable<Bool>
+            weak var isFirstResponder: Observable<Bool>?
             let id: UUID = UUID()
             var changeFirstResponder: ((UUID)->Void)?
             

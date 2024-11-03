@@ -55,11 +55,7 @@ final class ProductFeedbackTableView: UITableView {
             self.beginUpdates()
             self.endUpdates()
             layoutFlag = !layoutFlag
-            //self.scrollToNearestSelectedRow(at: .bottom, animated: false)
         }
-        
-        //self.scrollToRow(at: indexPath.first ?? .init(row: 0, section: 0), at: .none, animated: false)
-        //self.scrollToNearestSelectedRow(at: UITableView.ScrollPosition.top, animated: false)
     }
     
     deinit {
@@ -72,7 +68,9 @@ final class ProductFeedbackTableView: UITableView {
 extension ProductFeedbackTableView {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.endEditing(true)
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
+            self.endEditing(true)
+        }
     }
 }
 

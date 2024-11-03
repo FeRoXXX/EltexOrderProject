@@ -15,9 +15,14 @@ final class ProductFeedbackTableView: UITableView {
     
     //MARK: - Public properties
     
-    var data: [ProductFeedbackTableModel] = [] {
+    var data: [ProductFeedbackTableModel] = []
+    var indexPath: [IndexPath] = [] {
         didSet {
-            self.reloadData()
+            if indexPath.isEmpty {
+                self.reloadData()
+            } else {
+                self.reloadRows(at: indexPath, with: .automatic)
+            }
         }
     }
     

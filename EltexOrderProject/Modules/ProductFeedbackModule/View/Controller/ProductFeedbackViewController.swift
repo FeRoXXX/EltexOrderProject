@@ -66,6 +66,10 @@ extension ProductFeedbackViewController: ProductFeedbackViewModelDelegate {
         contentView.setupData(data)
     }
     
+    func updateIndexPath(_ indexPath: [IndexPath]) {
+        contentView.setupIndexPath(indexPath: indexPath)
+    }
+    
     func setupTableViewModel(_ data: ProductFeedbackModel?) {
         contentView.setupTableViewModel(data)
     }

@@ -35,27 +35,6 @@ final class PhotoCollectionView: UICollectionView {
     }
 }
 
-//MARK: - Private extension
-
-private extension PhotoCollectionView {
-    
-    //MARK: - Create layout function
-    
-    func createLayout() -> UICollectionViewLayout {
-        let spacing: CGFloat = 8
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0 / 4.0))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-    
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        layout.configuration.scrollDirection = .horizontal
-        return layout
-    }
-}
-
 //MARK: - Collection view protocols
 
 extension PhotoCollectionView: CollectionViewProtocols {

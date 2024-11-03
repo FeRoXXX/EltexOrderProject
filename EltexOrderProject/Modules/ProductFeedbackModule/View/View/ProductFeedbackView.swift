@@ -68,4 +68,10 @@ extension ProductFeedbackView {
     func setupTableViewModel(_ data: ProductFeedbackModel?) {
         tableView.viewModel = data
     }
+    
+    //MARK: - Setup indexPath function
+    
+    func setupIndexPath(indexPath: [IndexPath]) {
+        tableView.indexPath = indexPath
+    }
 }

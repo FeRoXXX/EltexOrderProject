@@ -17,15 +17,9 @@ final class ProductFeedbackViewModel {
         }
     }
     
-    private var indexPath: [IndexPath] = [] {
+    private var indexPath: [IndexPath]? = [] {
         didSet {
             delegate?.updateIndexPath(indexPath)
-        }
-    }
-    
-    private var tableViewModel: ProductFeedbackModel? {
-        didSet {
-            delegate?.setupTableViewModel(tableViewModel)
         }
     }
     
@@ -38,7 +32,6 @@ final class ProductFeedbackViewModel {
     weak var delegate: ProductFeedbackViewModelDelegate? {
         didSet {
             delegate?.updateData(formattedDataList)
-            delegate?.setupTableViewModel(tableViewModel)
         }
     }
     
@@ -48,6 +41,12 @@ final class ProductFeedbackViewModel {
         self.receivedData = receivedData
         formatReceivedDataFirst()
     }
+    
+    //MARK: - Deinit
+    
+    deinit {
+        formattedDataList = []
+    }
 }
 
 //MARK: - Private extension
@@ -55,25 +54,21 @@ final class ProductFeedbackViewModel {
 private extension ProductFeedbackViewModel {
     
     func loadAndBuildFormattedData(placeholder: String, numberOfResponder: Int) {
-        let isFirstResponder: Observable<Bool> = .init(value: false)
-        isFirstResponder.bind { value in
-            if !value! {
-                self.changeFirstResponder(numberOfResponder: numberOfResponder)
-            }
-        }
-        formattedDataList.append(.init(type: .reviewTextCell(.init(placeholder: placeholder, isFirstResponder: isFirstResponder))))
+        formattedDataList.append(.init(type: .reviewTextCell(.init(placeholder: placeholder, isFirstResponder: .init(value: false), changeFirstResponder: changeFirstResponder))))
     }
     
-    func changeFirstResponder(numberOfResponder: Int) {
+    func changeFirstResponder(id: UUID) {
         var counterOfCell = 0
         for (index, element) in formattedDataList.enumerated() {
             switch element.type {
-            case .reviewTextCell(var data):
-                counterOfCell += 1
-                if numberOfResponder + 1 == counterOfCell {
+            case .reviewTextCell(let data):
+                if id == data.id {
+                    counterOfCell += 1
+                } else if counterOfCell == 1 {
                     data.isFirstResponder.value = true
-                    formattedDataList[index] = .init(type: .reviewTextCell(data))
-                    indexPath = [.init(row: index, section: 0)]
+                    formattedDataList[index] = .init(type: .reviewTextCell(data), id: element.id)
+                    indexPath = nil
+                    counterOfCell += 1
                 }
             default:
                 break

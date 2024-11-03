@@ -21,12 +21,38 @@ final class ProductFeedbackView: UIView {
     
     init() {
         super.init(frame: .zero)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         setupUI()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc
+    func keyboardWillAppear() {
+        tableView.snp.removeConstraints()
+        tableView.snp.makeConstraints { make in
+            make.top.trailing.leading.equalToSuperview()
+            make.bottom.equalToSuperview().inset(keyboardLayoutGuide.layoutFrame.height)
+        }
+        layoutSubviews()
+    }
+    
+    @objc
+    func keyboardWillDisappear() {
+        tableView.snp.removeConstraints()
+        tableView.snp.makeConstraints { make in
+            make.top.bottom.trailing.leading.equalToSuperview()
+        }
+        layoutSubviews()
     }
 }
 
@@ -63,15 +89,9 @@ extension ProductFeedbackView {
         tableView.data = data
     }
     
-    //MARK: - Setup table viewModel
-    
-    func setupTableViewModel(_ data: ProductFeedbackModel?) {
-        tableView.viewModel = data
-    }
-    
     //MARK: - Setup indexPath function
     
-    func setupIndexPath(indexPath: [IndexPath]) {
+    func setupIndexPath(indexPath: [IndexPath]?) {
         tableView.indexPath = indexPath
     }
 }

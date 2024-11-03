@@ -16,17 +16,18 @@ final class ProductFeedbackTableView: UITableView {
     //MARK: - Public properties
     
     var data: [ProductFeedbackTableModel] = []
-    var indexPath: [IndexPath] = [] {
+    var indexPath: [IndexPath]? {
         didSet {
-            if indexPath.isEmpty {
-                self.reloadData()
-            } else {
-                self.reloadRows(at: indexPath, with: .automatic)
+            if let indexPath {
+                if indexPath.isEmpty {
+                    self.reloadData()
+                } else {
+                    self.reloadRows(at: indexPath, with: .automatic)
+                }
             }
         }
     }
     
-    var viewModel: ProductFeedbackModel?
     //MARK: - Initialization
     
     override init(frame: CGRect, style: UITableView.Style) {
@@ -54,7 +55,15 @@ final class ProductFeedbackTableView: UITableView {
             self.beginUpdates()
             self.endUpdates()
             layoutFlag = !layoutFlag
+            //self.scrollToNearestSelectedRow(at: .bottom, animated: false)
         }
+        
+        //self.scrollToRow(at: indexPath.first ?? .init(row: 0, section: 0), at: .none, animated: false)
+        //self.scrollToNearestSelectedRow(at: UITableView.ScrollPosition.top, animated: false)
+    }
+    
+    deinit {
+        data = []
     }
 }
 
@@ -63,7 +72,7 @@ final class ProductFeedbackTableView: UITableView {
 extension ProductFeedbackTableView {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        viewModel?.scrollIsActive?()
+        self.endEditing(true)
     }
 }
 

@@ -31,19 +31,34 @@ final class ProductFeedbackView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Deinit
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
+    //MARK: - Keyboard visible functions
     @objc
-    func keyboardWillAppear() {
-        tableView.snp.removeConstraints()
-        tableView.snp.makeConstraints { make in
-            make.top.trailing.leading.equalToSuperview()
-            make.bottom.equalToSuperview().inset(keyboardLayoutGuide.layoutFrame.height)
+    func keyboardWillAppear(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double,
+              let animationCurve = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else { return }
+        
+        let keyboardHeight = keyboardFrame.height
+
+        tableView.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(keyboardHeight)
         }
-        layoutSubviews()
+
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: animationCurve << 16),
+                       animations: {
+                           self.layoutIfNeeded()
+                           self.tableView.setContentOffset(.init(x: 0, y: self.tableView.contentSize.height - self.tableView.bounds.size.height), animated: false)
+                       },
+                       completion: nil)
     }
     
     @objc

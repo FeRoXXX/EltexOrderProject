@@ -25,7 +25,6 @@ final class ProductFeedbackViewModel {
     
     private var receivedData: ProductTableModel
     private var imageArray: [String] = ["firstHand", "secondHand", "thirdHand", "fourthHand", "fifthHand", "sixthHand", "seventhHand"]
-
     
     //MARK: - Public properties
     

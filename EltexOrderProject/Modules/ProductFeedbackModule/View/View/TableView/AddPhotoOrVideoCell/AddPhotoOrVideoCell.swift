@@ -19,19 +19,6 @@ final class AddPhotoOrVideoCell: UITableViewCell {
         return collectionView
     }()
     
-    func createLayout() -> UICollectionViewLayout {
-        let spacing: CGFloat = 4
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0 / 4.0))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 12, bottom: 0, trailing: 12)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    
     //MARK: - Public properties
     
     var viewModel: ProductFeedbackTableModel.DataModel.AddPhotoOrVideoCell? {
@@ -51,6 +38,8 @@ final class AddPhotoOrVideoCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - LayoutSubviews function
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -81,6 +70,21 @@ private extension AddPhotoOrVideoCell {
         photoCollectionView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    //MARK: - Create layout for collection view
+    
+    func createLayout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 4
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0 / 4.0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 12, bottom: 0, trailing: 12)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
     
     //MARK: - Setup data function

@@ -85,9 +85,9 @@ private extension ReviewTextCell {
         
         switch viewModel?.isFirstResponder.value ?? false {
         case true:
-            //DispatchQueue.main.async(execute: DispatchWorkItem(block: {
+            DispatchQueue.main.async(execute: DispatchWorkItem(block: {
                 self.textField.becomeFirstResponder()
-            //}))
+            }))
         case false:
             textField.resignFirstResponder()
         }

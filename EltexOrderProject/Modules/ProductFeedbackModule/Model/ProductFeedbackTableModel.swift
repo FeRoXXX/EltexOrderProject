@@ -91,10 +91,7 @@ struct ProductFeedbackTableModel {
             let placeholder: String
             var isFirstResponder: Observable<Bool>
             let id: UUID = UUID()
-            
-            mutating func correctResponder(_ value: Bool) {
-                self.isFirstResponder.value = value
-            }
+            var changeFirstResponder: ((UUID)->Void)?
             
             static func == (lhs: ProductFeedbackTableModel.DataModel.ReviewTextCell, rhs: ProductFeedbackTableModel.DataModel.ReviewTextCell) -> Bool {
                 return lhs.placeholder == rhs.placeholder && lhs.id == rhs.id

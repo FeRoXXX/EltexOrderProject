@@ -80,16 +80,18 @@ private extension ReviewTextCell {
     
     func updateData() {
         textField.placeholder = viewModel?.placeholder
-        
-        //print(textField.text)
-        
-        switch viewModel?.isFirstResponder.value ?? false {
-        case true:
-            DispatchQueue.main.async(execute: DispatchWorkItem(block: {
+        viewModel?.isFirstResponder.bind({ bool in
+            switch bool ?? false {
+            case true:
                 self.textField.becomeFirstResponder()
-            }))
-        case false:
-            textField.resignFirstResponder()
+            case false:
+                break
+            }
+        })
+        if viewModel?.placeholder == "Комментарий" {
+            textField.returnKeyType = .done
+        } else {
+            textField.returnKeyType = .next
         }
     }
 }
@@ -104,7 +106,10 @@ extension ReviewTextCell: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         viewModel?.isFirstResponder.value = false
-        textField.resignFirstResponder()
+        if textField.returnKeyType == .done {
+            textField.resignFirstResponder()
+        }
+        viewModel?.changeFirstResponder?(viewModel?.id ?? UUID())
         return false
     }
 }

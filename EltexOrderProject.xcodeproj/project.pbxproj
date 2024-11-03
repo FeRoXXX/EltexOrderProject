@@ -64,7 +64,6 @@
 		27EC9F982CBF88D500BEF768 /* OrderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */; };
 		27EC9F9C2CBFAD5D00BEF768 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 27EC9F9B2CBFAD5D00BEF768 /* SnapKit */; };
 		27EC9FA52CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */; };
-		27F76BB42CD6089800DFAAE7 /* ProductFeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F76BB32CD6089800DFAAE7 /* ProductFeedbackModel.swift */; };
 		27FEF7942CD635E500138B0D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FEF7932CD635E500138B0D /* Observable.swift */; };
 /* End PBXBuildFile section */
 
@@ -140,7 +139,6 @@
 		27EC9F952CBF870400BEF768 /* OrderInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoViewController.swift; sourceTree = "<group>"; };
 		27EC9F972CBF88D500BEF768 /* OrderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoView.swift; sourceTree = "<group>"; };
 		27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTableViewCell.swift; sourceTree = "<group>"; };
-		27F76BB32CD6089800DFAAE7 /* ProductFeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFeedbackModel.swift; sourceTree = "<group>"; };
 		27FEF7932CD635E500138B0D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -477,7 +475,6 @@
 			isa = PBXGroup;
 			children = (
 				27D5F6F42CD33B6700C63184 /* ProductFeedbackTableModel.swift */,
-				27F76BB32CD6089800DFAAE7 /* ProductFeedbackModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -734,7 +731,6 @@
 				27D5F6F32CD339BB00C63184 /* ProductInfoCell.swift in Sources */,
 				27CED8442CC1352200FE6E66 /* ThreeItemStack.swift in Sources */,
 				279F6A352CCB77AB0002892F /* ActivatePromocodeViewController.swift in Sources */,
-				27F76BB42CD6089800DFAAE7 /* ProductFeedbackModel.swift in Sources */,
 				279F6A372CCB77B40002892F /* ActivatePromocodeView.swift in Sources */,
 				27E210A92CD27995000F6896 /* ProductFeedbackViewController.swift in Sources */,
 				27AD851A2CD3D0BF00C9FFA2 /* CheckBoxView.swift in Sources */,

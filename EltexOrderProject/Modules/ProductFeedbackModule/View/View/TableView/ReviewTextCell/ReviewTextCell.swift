@@ -80,10 +80,10 @@ private extension ReviewTextCell {
     
     func updateData() {
         textField.placeholder = viewModel?.placeholder
-        viewModel?.isFirstResponder.bind({ bool in
+        viewModel?.isFirstResponder?.bind({ [weak self] bool in
             switch bool ?? false {
             case true:
-                self.textField.becomeFirstResponder()
+                self?.textField.becomeFirstResponder()
             case false:
                 break
             }
@@ -101,11 +101,11 @@ private extension ReviewTextCell {
 extension ReviewTextCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        viewModel?.isFirstResponder.value = true
+        viewModel?.isFirstResponder?.value = true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        viewModel?.isFirstResponder.value = false
+        viewModel?.isFirstResponder?.value = false
         if textField.returnKeyType == .done {
             textField.resignFirstResponder()
         }

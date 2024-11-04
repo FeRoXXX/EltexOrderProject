@@ -109,6 +109,8 @@ final class ProductFeedbackViewModel {
         }
     }
     
+    //MARK: - Add photo tapped
+    
     func onAddPhotoEmptyIsTapped() {
         
         for (index, element) in formattedDataList.enumerated() {
@@ -144,6 +146,8 @@ final class ProductFeedbackViewModel {
         }
     }
     
+    //MARK: - Delete photo tapped
+    
     func onDeletePhotoIsTapped(at id: UUID) {
         
         for (index, element) in formattedDataList.enumerated() {
@@ -171,6 +175,8 @@ final class ProductFeedbackViewModel {
         }
     }
     
+    //MARK: - Stars rating tapped
+    
     func onStarsRatingTapped(touch: Double, width: CGFloat) {
         switch DataModel.ProductStarsCell.StarsRatingView.TapLocation.getLocation(touch: touch, firstElementLocation: width) {
         case .first:
@@ -185,28 +191,6 @@ final class ProductFeedbackViewModel {
             createUpdateRatingCells(title: "Отлично", currentRating: .fifth)
         case .none:
             createUpdateRatingCells(currentRating: .none)
-        }
-    }
-    
-    func createUpdateRatingCells(title: String? = nil, currentRating: DataModel.ProductStarsCell.StarsRatingView.TapLocation) {
-        for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .starsErrorCell:
-                formattedDataList.remove(at: index)
-                onCellDeleteAtIndex.value = IndexPath(row: index, section: 0)
-            default:
-                break
-            }
-        }
-        
-        for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .productStarsCell:
-                formattedDataList[index] = .productStarsCell(.init(title: title, rating: .init(currentRating: currentRating)))
-                onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
-            default:
-                break
-            }
         }
     }
     
@@ -252,5 +236,29 @@ private extension ProductFeedbackViewModel {
         loadAndBuildFormattedData(placeholder: Constants.ReviewTextCell.placeholderThird.rawValue, numberOfResponder: 3)
         formattedDataList.append(.sendReviewCell(.init(buttonTitle: Constants.SendReviewCell.buttonTitle.rawValue, userAgreement: Constants.SendReviewCell.userAgreement.rawValue, userAgreementHighlighted: Constants.SendReviewCell.userAgreementHighlighted.rawValue, checkBox: .init(title: Constants.SendReviewCell.checkBoxTitle.rawValue, isActive: false, image: Constants.SendReviewCell.checkBoxImage.rawValue))))
         onDataReload.value = true
+    }
+    
+    //MARK: - Create rating cells
+    
+    func createUpdateRatingCells(title: String? = nil, currentRating: DataModel.ProductStarsCell.StarsRatingView.TapLocation) {
+        for (index, element) in formattedDataList.enumerated() {
+            switch element {
+            case .starsErrorCell:
+                formattedDataList.remove(at: index)
+                onCellDeleteAtIndex.value = IndexPath(row: index, section: 0)
+            default:
+                break
+            }
+        }
+        
+        for (index, element) in formattedDataList.enumerated() {
+            switch element {
+            case .productStarsCell:
+                formattedDataList[index] = .productStarsCell(.init(title: title, rating: .init(currentRating: currentRating)))
+                onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
+            default:
+                break
+            }
+        }
     }
 }

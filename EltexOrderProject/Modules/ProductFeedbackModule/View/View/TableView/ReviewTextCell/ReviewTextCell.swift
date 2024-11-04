@@ -29,11 +29,13 @@ final class ReviewTextCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.ReviewTextCell? {
+    var viewModel: DataModel.ReviewTextCell? {
         didSet {
             updateData()
         }
     }
+    
+    var onReturnButtonClicked: ((UUID) -> Void)?
     
     //MARK: - Initialization
     
@@ -109,7 +111,7 @@ extension ReviewTextCell: UITextFieldDelegate {
         if textField.returnKeyType == .done {
             textField.resignFirstResponder()
         }
-        viewModel?.changeFirstResponder?(viewModel?.id ?? UUID())
+        onReturnButtonClicked?(viewModel?.id ?? UUID())
         return false
     }
 }

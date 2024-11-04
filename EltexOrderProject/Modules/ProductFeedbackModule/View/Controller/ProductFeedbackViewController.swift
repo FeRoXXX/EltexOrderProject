@@ -11,7 +11,7 @@ final class ProductFeedbackViewController: UIViewController {
     
     //MARK: - Private properties
     
-    private let contentView = ProductFeedbackView()
+    private lazy var contentView = ProductFeedbackView(viewModel: viewModel)
     private let viewModel: ProductFeedbackViewModel
     
     //MARK: - Lifecycle functions
@@ -26,7 +26,6 @@ final class ProductFeedbackViewController: UIViewController {
     init(viewModel: ProductFeedbackViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        viewModel.delegate = self
     }
     
     @available(*, unavailable)
@@ -55,18 +54,5 @@ private extension ProductFeedbackViewController {
         self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)
         title = "Напишите отзыв"
-    }
-}
-
-//MARK: - ProductFeedbackViewModelDelegate
-
-extension ProductFeedbackViewController: ProductFeedbackViewModelDelegate {
-    
-    func updateData(_ data: [ProductFeedbackTableModel]) {
-        contentView.setupData(data)
-    }
-    
-    func updateIndexPath(_ indexPath: [IndexPath]?) {
-        contentView.setupIndexPath(indexPath: indexPath)
     }
 }

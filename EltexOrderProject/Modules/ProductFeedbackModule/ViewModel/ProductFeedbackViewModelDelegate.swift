@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol ProductFeedbackViewModelDelegate: AnyObject {
-    
-    func updateData(_ data: [ProductFeedbackTableModel])
-    func updateIndexPath(_ indexPath: [IndexPath]?)
-}
+//protocol ProductFeedbackViewModelDelegate: AnyObject {
+//    
+//    func updateData(_ data: [ProductFeedbackTableModel])
+//    func updateIndexPath(_ indexPath: [IndexPath]?)
+//}

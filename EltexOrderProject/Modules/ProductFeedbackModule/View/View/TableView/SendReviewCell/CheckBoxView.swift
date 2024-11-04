@@ -28,11 +28,13 @@ final class CheckBoxView: UIView {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.SendReviewCell.CheckBoxView? {
+    var viewModel: DataModel.SendReviewCell.CheckBoxView? {
         didSet {
             updateData()
         }
     }
+    
+    var onCheckBoxTapped: (() -> Void)?
     
     //MARK: - Initialization
     
@@ -99,6 +101,6 @@ private extension CheckBoxView {
     
     @objc
     func checkBoxTapped() {
-        viewModel?.checkBoxTapped?(viewModel?.isActive ?? false)
+        onCheckBoxTapped?()
     }
 }

@@ -12,14 +12,17 @@ final class ProductFeedbackView: UIView {
     
     //MARK: - Private properties
     
-    private let tableView: ProductFeedbackTableView = {
-        let tableView = ProductFeedbackTableView()
+    private lazy var tableView: ProductFeedbackTableView = {
+        let tableView = ProductFeedbackTableView(viewModel: viewModel)
         return tableView
     }()
     
+    var viewModel: ProductFeedbackViewModel
+    
     //MARK: - Initialization
     
-    init() {
+    init(viewModel: ProductFeedbackViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -82,6 +85,7 @@ private extension ProductFeedbackView {
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addSubviews()
         setupConstraints()
+        setupBinds()
     }
     
     func addSubviews() {
@@ -93,21 +97,42 @@ private extension ProductFeedbackView {
             make.top.bottom.trailing.leading.equalToSuperview()
         }
     }
-}
-
-//MARK: - Public extension
-
-extension ProductFeedbackView {
     
-    //MARK: - Setup data functions
+    //MARK: - Setup bindings
     
-    func setupData(_ data: [ProductFeedbackTableModel]) {
-        tableView.data = data
-    }
-    
-    //MARK: - Setup indexPath function
-    
-    func setupIndexPath(indexPath: [IndexPath]?) {
-        tableView.indexPath = indexPath
+    func setupBinds() {
+        viewModel.onDataReload.bind { [weak self] value in
+            guard value != nil else { return }
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.viewModel.onDataReload.value = nil
+            }
+        }
+        
+        viewModel.onCellReloadAtIndex.bind { [weak self] value in
+            guard let value else { return }
+            DispatchQueue.main.async {
+                self?.tableView.reloadRows(at: [value], with: .automatic)
+                self?.viewModel.onCellReloadAtIndex.value = nil
+            }
+        }
+        
+        viewModel.onCellInsertAtIndex.bind { [weak self] value in
+            guard let value,
+                let self else { return }
+            DispatchQueue.main.async {
+                self.tableView.insertRows(at: [value], with: .automatic)
+                self.viewModel.onCellInsertAtIndex.value = nil
+            }
+        }
+        
+        viewModel.onCellDeleteAtIndex.bind { [weak self] value in
+            guard let value,
+                let self else { return }
+            DispatchQueue.main.async {
+                self.tableView.deleteRows(at: [value], with: .automatic)
+                self.viewModel.onCellDeleteAtIndex.value = nil
+            }
+        }
     }
 }

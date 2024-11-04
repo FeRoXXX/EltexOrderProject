@@ -12,8 +12,11 @@ final class SendReviewCell: UITableViewCell {
     
     //MARK: - Private properties
     
-    private let checkBoxView: CheckBoxView = {
+    private lazy var checkBoxView: CheckBoxView = {
         let checkBoxView = CheckBoxView()
+        checkBoxView.onCheckBoxTapped = { [weak self] in
+            self?.onCheckBoxTapped?()
+        }
         return checkBoxView
     }()
     
@@ -37,11 +40,14 @@ final class SendReviewCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.SendReviewCell? {
+    var viewModel: DataModel.SendReviewCell? {
         didSet {
             updateData()
         }
     }
+    
+    var onSendButtonTapped: (() -> Void)?
+    var onCheckBoxTapped: (() -> Void)?
     
     //MARK: - Initialization
     
@@ -107,7 +113,7 @@ private extension SendReviewCell {
     
     @objc
     func sendButtonTapped() {
-        viewModel?.sendButtonIsTapped?()
+        onSendButtonTapped?()
     }
     
     //MARK: - Style user agreement text

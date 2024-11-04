@@ -14,11 +14,14 @@ final class PhotoCollectionView: UICollectionView {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.AddPhotoOrVideoCell? {
+    var viewModel: DataModel.AddPhotoOrVideoCell? {
         didSet {
             self.reloadData()
         }
     }
+    
+    var onAddButtonTapped: (() -> Void)?
+    var onDeleteButtonTapped: ((UUID) -> Void)?
     
     //MARK: - Initialization
     
@@ -47,6 +50,13 @@ extension PhotoCollectionView: CollectionViewProtocols {
         let currentElement = viewModel?.cell[indexPath.row]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
         cell.viewModel = currentElement
+        cell.onAddButtonTapped = { [weak self] in
+            self?.onAddButtonTapped?()
+        }
+        
+        cell.onDeleteButtonTapped = { [weak self] id in
+            self?.onDeleteButtonTapped?(id)
+        }
         return cell
     }
 }

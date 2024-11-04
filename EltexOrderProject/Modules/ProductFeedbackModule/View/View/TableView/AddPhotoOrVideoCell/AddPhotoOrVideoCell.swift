@@ -15,17 +15,25 @@ final class AddPhotoOrVideoCell: UITableViewCell {
     private lazy var photoCollectionView: PhotoCollectionView = {
         let collectionView = PhotoCollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        
+        collectionView.onAddButtonTapped = { [weak self] in
+            self?.onAddButtonTapped?()
+        }
+        collectionView.onDeleteButtonTapped = { [weak self] id in
+            self?.onDeleteButtonTapped?(id)
+        }
         return collectionView
     }()
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.AddPhotoOrVideoCell? {
+    var viewModel: DataModel.AddPhotoOrVideoCell? {
         didSet {
             updateData()
         }
     }
+    
+    var onAddButtonTapped: (() -> Void)?
+    var onDeleteButtonTapped: ((UUID) -> Void)?
     
     //MARK: - Initialization
     

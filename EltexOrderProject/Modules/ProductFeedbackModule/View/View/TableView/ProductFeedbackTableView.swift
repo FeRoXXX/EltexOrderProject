@@ -15,23 +15,13 @@ final class ProductFeedbackTableView: UITableView {
     
     //MARK: - Public properties
     
-    var data: [ProductFeedbackTableModel] = []
-    var indexPath: [IndexPath]? {
-        didSet {
-            if let indexPath {
-                if indexPath.isEmpty {
-                    self.reloadData()
-                } else {
-                    self.reloadRows(at: indexPath, with: .automatic)
-                }
-            }
-        }
-    }
+    var viewModel: ProductFeedbackViewModel
     
     //MARK: - Initialization
     
-    override init(frame: CGRect, style: UITableView.Style) {
-        super.init(frame: frame, style: style)
+    init(viewModel: ProductFeedbackViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero, style: .plain)
         self.register(ProductInfoCell.self, forCellReuseIdentifier: ProductInfoCell.identifier)
         self.register(ProductStarsCell.self, forCellReuseIdentifier: ProductStarsCell.identifier)
         self.register(AddPhotoOrVideoEmptyCell.self, forCellReuseIdentifier: AddPhotoOrVideoEmptyCell.identifier)
@@ -59,12 +49,6 @@ final class ProductFeedbackTableView: UITableView {
             layoutFlag = !layoutFlag
         }
     }
-    
-    //MARK: - deinit
-    
-    deinit {
-        data = []
-    }
 }
 
 //MARK: - Public extension
@@ -83,13 +67,14 @@ extension ProductFeedbackTableView {
 extension ProductFeedbackTableView: TableViewProtocols {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        
+        viewModel.formattedDataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentData = data[indexPath.row]
+        let currentData = viewModel.formattedDataList[indexPath.row]
         
-        switch currentData.type {
+        switch currentData {
         case .productInfoCell(let data):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductInfoCell.identifier, for: indexPath) as? ProductInfoCell else { return UITableViewCell() }
             cell.viewModel = data
@@ -98,21 +83,37 @@ extension ProductFeedbackTableView: TableViewProtocols {
         case .productStarsCell(let data):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductStarsCell.identifier, for: indexPath) as? ProductStarsCell else { return UITableViewCell() }
             cell.viewModel = data
+            cell.onRatingTapped = { [weak self] touch, width in
+                self?.viewModel.onStarsRatingTapped(touch: touch, width: width)
+            }
             cell.selectionStyle = .none
             return cell
         case .addPhotoOrVideoEmptyCell(let data):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddPhotoOrVideoEmptyCell.identifier, for: indexPath) as? AddPhotoOrVideoEmptyCell else { return UITableViewCell() }
             cell.viewModel = data
+            cell.onCellIsTapped = { [weak self] in
+                self?.viewModel.onAddPhotoEmptyIsTapped()
+            }
             cell.selectionStyle = .none
             return cell
         case .reviewTextCell(let data):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTextCell.identifier, for: indexPath) as? ReviewTextCell else { return UITableViewCell() }
             cell.viewModel = data
             cell.selectionStyle = .none
+            cell.onReturnButtonClicked = { [weak self] id in
+                self?.viewModel.changeFirstResponder(id: id)
+            }
             return cell
         case .sendReviewCell(let data):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SendReviewCell.identifier, for: indexPath) as? SendReviewCell else { return UITableViewCell() }
             cell.viewModel = data
+            cell.onCheckBoxTapped = { [weak self] in
+                self?.viewModel.onCheckBoxTapped()
+            }
+            
+            cell.onSendButtonTapped = { [weak self] in
+                self?.viewModel.onSendButtonTapped()
+            }
             cell.selectionStyle = .none
             return cell
         case .starsErrorCell(let data):
@@ -123,6 +124,12 @@ extension ProductFeedbackTableView: TableViewProtocols {
         case .addPhotoOrVideoCell(let data):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddPhotoOrVideoCell.identifier, for: indexPath) as? AddPhotoOrVideoCell else { return UITableViewCell() }
             cell.viewModel = data
+            cell.onAddButtonTapped = { [weak self] in
+                self?.viewModel.onAddNewPhotoIsTapped()
+            }
+            cell.onDeleteButtonTapped = { [weak self] id in
+                self?.viewModel.onDeletePhotoIsTapped(at: id)
+            }
             layoutFlag = true
             cell.selectionStyle = .none
             return cell

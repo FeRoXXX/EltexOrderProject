@@ -50,11 +50,13 @@ final class StarsRatingView: UIView {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.ProductStarsCell.StarsRatingView? {
+    var viewModel: DataModel.ProductStarsCell.StarsRatingView? {
         didSet {
             updateData()
         }
     }
+    
+    var onRatingTapped: ((Double, CGFloat) -> Void)?
     
     //MARK: - Initialization
     
@@ -101,7 +103,7 @@ private extension StarsRatingView {
     
     @objc
     func showMoreActions(touch: UITapGestureRecognizer) {
-        viewModel?.touchLocation?(touch.location(in: touch.view).x, starFirst.frame.width)
+        onRatingTapped?(Double(touch.location(in: touch.view).x), starFirst.frame.width)
     }
     
     //MARK: - Update data function

@@ -32,11 +32,14 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.AddPhotoOrVideoCell.PhotoCell? {
+    var viewModel: DataModel.AddPhotoOrVideoCell.PhotoCell? {
         didSet {
             updateData()
         }
     }
+    
+    var onAddButtonTapped: (() -> Void)?
+    var onDeleteButtonTapped: ((UUID) -> Void)?
     
     //MARK: - Initialization
     
@@ -127,12 +130,13 @@ private extension PhotoCollectionViewCell {
     
     @objc
     func cellIsTapped() {
-        viewModel?.cellIsTapped?()
+        onAddButtonTapped?()
     }
     
     @objc
     func crossIsTapped() {
-        viewModel?.deleteButtonTapped?(viewModel?.id ?? UUID())
+        guard let viewModel else { return }
+        onDeleteButtonTapped?(viewModel.id)
     }
 }
 

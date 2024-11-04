@@ -60,11 +60,13 @@ final class AddPhotoOrVideoEmptyCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.AddPhotoOrVideoEmptyCell? {
+    var viewModel: DataModel.AddPhotoOrVideoEmptyCell? {
         didSet {
             updateData()
         }
     }
+    
+    var onCellIsTapped: (() -> Void)?
     
     //MARK: - Initialization
     
@@ -126,7 +128,7 @@ private extension AddPhotoOrVideoEmptyCell {
     
     @objc
     func addPhoto() {
-        viewModel?.cellIsTapped?()
+        onCellIsTapped?()
     }
 }
 

@@ -33,18 +33,23 @@ final class ProductStarsCell: UITableViewCell {
         return label
     }()
     
-    private var starsRatingView: StarsRatingView = {
+    private lazy var starsRatingView: StarsRatingView = {
         let view = StarsRatingView()
+        view.onRatingTapped = { [weak self] touch, width in
+            self?.onRatingTapped?(touch, width)
+        }
         return view
     }()
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.ProductStarsCell? {
+    var viewModel: DataModel.ProductStarsCell? {
         didSet {
             updateData()
         }
     }
+    
+    var onRatingTapped: ((Double, CGFloat) -> Void)?
     
     //MARK: - Initialization
     

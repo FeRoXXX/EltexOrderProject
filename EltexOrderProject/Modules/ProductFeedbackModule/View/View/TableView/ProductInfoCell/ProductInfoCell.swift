@@ -52,7 +52,7 @@ final class ProductInfoCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.ProductInfoCell? {
+    var viewModel: DataModel.ProductInfoCell? {
         didSet {
             updateData()
         }
@@ -107,6 +107,7 @@ private extension ProductInfoCell {
 }
 
 //MARK: - Public extension
+
 extension ProductInfoCell {
     
     //MARK: - Static properties

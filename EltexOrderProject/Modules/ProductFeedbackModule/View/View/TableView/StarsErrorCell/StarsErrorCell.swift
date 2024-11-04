@@ -37,7 +37,7 @@ final class StarsErrorCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackTableModel.DataModel.StarsErrorCell? {
+    var viewModel: DataModel.StarsErrorCell? {
         didSet {
             updateData()
         }

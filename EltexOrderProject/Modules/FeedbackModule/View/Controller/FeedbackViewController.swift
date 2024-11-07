@@ -11,15 +11,15 @@ final class FeedbackViewController: UIViewController {
     
     //MARK: - Private properties
     
-    private let feedbackView: FeedbackView = .init()
-    private let viewModel: FeedbackViewModel
+    private lazy var feedbackView: FeedbackView = FeedbackView(viewModel: viewModel)
+    private let viewModel: FeedbackViewModelInput & FeedbackViewModelOutput
     
     //MARK: - Lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupClosures()
+        bind()
     }
     
     //MARK: - Initialization
@@ -27,7 +27,6 @@ final class FeedbackViewController: UIViewController {
     init(viewModel: FeedbackViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        viewModel.delegate = self
     }
     
     @available(*, unavailable)
@@ -52,28 +51,17 @@ private extension FeedbackViewController {
         self.title = "Напишите отзыв"
     }
     
-    func setupClosures() {
-        feedbackView.cellDidChange = { [weak self] index in
-            self?.viewModel.cellDidChange(index)
+    //MARK: - Bindings
+    
+    func bind() {
+        viewModel.onNavigateToNext.bind { [weak self] value in
+            guard let value else { return }
+            self?.navigationController?.pushViewController(ProductFeedbackModuleAssembly.build(data: value), animated: true)
         }
-    }
-}
-
-//MARK: - ViewModelDelegate
-
-extension FeedbackViewController: FeedbackViewModelDelegate {
-    
-    func setupData(_ data: [ProductTableModel]) {
-        feedbackView.setupData(data)
-    }
-    
-    func useNavigation(_ navigation: Navigation, data: ProductTableModel? = nil) {
-        switch navigation {
-        case .currentController:
-            return
-        case .nextController:
-            guard let data else { return }
-            self.navigationController?.pushViewController(ProductFeedbackModuleAssembly.build(data: data), animated: true)
+        
+        viewModel.onReloadTableView.bind { [weak self] value in
+            guard value != nil else { return }
+            self?.feedbackView.reloadTable()
         }
     }
 }

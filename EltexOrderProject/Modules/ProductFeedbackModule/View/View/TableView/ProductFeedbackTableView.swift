@@ -9,17 +9,13 @@ import UIKit
 
 final class ProductFeedbackTableView: UITableView {
     
-    //MARK: - Private properties
-    
-    private(set) var layoutFlag: Bool = false
-    
     //MARK: - Public properties
     
-    var viewModel: ProductFeedbackViewModel
+    var viewModel: ProductFeedbackViewModelInput
     
     //MARK: - Initialization
     
-    init(viewModel: ProductFeedbackViewModel) {
+    init(viewModel: ProductFeedbackViewModelInput) {
         self.viewModel = viewModel
         super.init(frame: .zero, style: .plain)
         self.register(ProductInfoCell.self, forCellReuseIdentifier: ProductInfoCell.identifier)
@@ -37,17 +33,6 @@ final class ProductFeedbackTableView: UITableView {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: - layoutSubviews
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if layoutFlag {
-            self.beginUpdates()
-            self.endUpdates()
-            layoutFlag = !layoutFlag
-        }
     }
 }
 
@@ -110,7 +95,6 @@ extension ProductFeedbackTableView: TableViewProtocols {
             cell.onCheckBoxTapped = { [weak self] in
                 self?.viewModel.onCheckBoxTapped()
             }
-            
             cell.onSendButtonTapped = { [weak self] in
                 self?.viewModel.onSendButtonTapped()
             }
@@ -130,7 +114,6 @@ extension ProductFeedbackTableView: TableViewProtocols {
             cell.onDeleteButtonTapped = { [weak self] id in
                 self?.viewModel.onDeletePhotoIsTapped(at: id)
             }
-            layoutFlag = true
             cell.selectionStyle = .none
             return cell
         }

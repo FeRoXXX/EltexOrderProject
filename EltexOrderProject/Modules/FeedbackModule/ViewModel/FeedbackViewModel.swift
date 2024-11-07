@@ -7,45 +7,26 @@
 
 import Foundation
 
-enum Navigation {
-    case currentController
-    case nextController
-}
-
-final class FeedbackViewModel {
+final class FeedbackViewModel: FeedbackViewModelInput {
     
     //MARK: - Private properties
     
-    private var data: [ProductTableModel] {
-        didSet {
-            delegate?.setupData(data)
-        }
-    }
-    
-    private var navigation: Navigation = .currentController {
-        didSet {
-            delegate?.useNavigation(navigation, data: selectData)
-        }
-    }
-    private var selectData: ProductTableModel?
-    
-    weak var delegate: FeedbackViewModelDelegate? {
-        didSet {
-            delegate?.setupData(data)
-        }
-    }
+    var onReloadTableView: Observable<Bool> = Observable(nil)
+    var onNavigateToNext: Observable<ProductTableModel> = Observable(nil)
+    var data: [ProductTableModel]
     
     //MARK: - Initialization
     
     init(data: [ProductTableModel]) {
         self.data = data
     }
-    
-    //MARK: - Public methods
+}
+
+//MARK: - FeedbackViewModelInput
+
+extension FeedbackViewModel: FeedbackViewModelOutput {
     
     func cellDidChange(_ index: Int) {
-        selectData = data[index]
-        navigation = .nextController
-        selectData = nil
+        onNavigateToNext.value = data[index]
     }
 }

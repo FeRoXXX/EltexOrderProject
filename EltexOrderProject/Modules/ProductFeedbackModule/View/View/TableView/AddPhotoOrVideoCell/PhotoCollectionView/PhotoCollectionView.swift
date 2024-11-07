@@ -14,7 +14,7 @@ final class PhotoCollectionView: UICollectionView {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.AddPhotoOrVideoCell? {
+    var viewModel: AddPhotoOrVideoCellModel? {
         didSet {
             self.reloadData()
         }

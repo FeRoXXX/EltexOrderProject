@@ -41,7 +41,7 @@ fileprivate enum Constants {
     }
 }
 
-final class ProductFeedbackViewModel {
+final class ProductFeedbackViewModel: ProductFeedbackViewModelOutput {
     
     //MARK: - Private properties
     
@@ -68,26 +68,24 @@ final class ProductFeedbackViewModel {
     deinit {
         formattedDataList.removeAll()
     }
-    
+}
+
+//MARK: - ProductFeedbackViewModelInput
+
+extension ProductFeedbackViewModel: ProductFeedbackViewModelInput {
     //MARK: - On checkBox tapped
     
     func onCheckBoxTapped() {
         
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .sendReviewCell(var data):
-                data.checkBox.isActive = !data.checkBox.isActive
-                if data.checkBox.isActive {
-                    data.checkBox.image = "checkbox.fill"
+            if case let .sendReviewCell(data) = element {
+                guard let value = data.checkBox.isActive.value else { return }
+                data.checkBox.isActive.value = !value
+                if data.checkBox.isActive.value ?? false {
                     formattedDataList[index] = .sendReviewCell(data)
-                    onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
                 } else {
-                    data.checkBox.image = "checkbox"
                     formattedDataList[index] = .sendReviewCell(data)
-                    onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
                 }
-            default:
-                break
             }
         }
     }
@@ -95,16 +93,18 @@ final class ProductFeedbackViewModel {
     //MARK: - On sendButton tapped
     
     func onSendButtonTapped() {
-        
+        if formattedDataList.contains(where: { data in
+            if case .starsErrorCell = data {
+                return true
+            }
+            return false
+        }) { return }
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .productStarsCell(let data):
+            if case let .productStarsCell(data) = element {
                 if data.rating.currentRating == .none {
                     formattedDataList.insert(.starsErrorCell(.init(errorLabel: Constants.StarsErrorCell.title.rawValue)), at: index + 1)
                     onCellInsertAtIndex.value = IndexPath(row: index + 1, section: 0)
                 }
-            default:
-                break
             }
         }
     }
@@ -114,12 +114,9 @@ final class ProductFeedbackViewModel {
     func onAddPhotoEmptyIsTapped() {
         
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .addPhotoOrVideoEmptyCell:
-                formattedDataList[index] = .addPhotoOrVideoCell(.init(cell: [.init(image: imageArray[0]), .init(image: nil)]))
+            if case .addPhotoOrVideoEmptyCell = element {
+                formattedDataList[index] = .addPhotoOrVideoCell(AddPhotoOrVideoCellModel(cell: [.init(image: imageArray[0]), .init(image: nil)]))
                 onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
-            default:
-                break
             }
         }
     }
@@ -127,21 +124,17 @@ final class ProductFeedbackViewModel {
     func onAddNewPhotoIsTapped() {
         
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .addPhotoOrVideoCell(var data):
+            if case var .addPhotoOrVideoCell(data) = element {
                 if data.cell.count < 7 {
-                    data.cell.insert(.init(image: imageArray[data.cell.count - 1]), at: data.cell.count - 1)
+                    data.cell.insert(.init(image: findImage(data.cell)), at: data.cell.count - 1)
                     formattedDataList[index] = .addPhotoOrVideoCell(data)
                     onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
                 } else {
                     data.cell.removeLast()
-                    data.cell.append(.init(image: imageArray[data.cell.count]))
+                    data.cell.append(.init(image: findImage(data.cell)))
                     formattedDataList[index] = .addPhotoOrVideoCell(data)
                     onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
                 }
-                return
-            default:
-                break
             }
         }
     }
@@ -151,26 +144,22 @@ final class ProductFeedbackViewModel {
     func onDeletePhotoIsTapped(at id: UUID) {
         
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .addPhotoOrVideoCell(var data):
-                for (indexSecond, elementSecond) in data.cell.enumerated() {
-                    if elementSecond.id == id {
-                        data.cell.remove(at: indexSecond)
-                        if data.cell.count == 1 {
-                            formattedDataList[index] = .addPhotoOrVideoEmptyCell(.init(title: Constants.AddPhotoOrVideoEmptyCell.title.rawValue, description: Constants.AddPhotoOrVideoEmptyCell.description.rawValue))
-                            onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
-                        } else if data.cell.count == 6 && data.cell.last != .init(image: nil) {
-                            data.cell.append(.init(image: nil))
-                            formattedDataList[index] = .addPhotoOrVideoCell(data)
-                            onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
-                        } else {
-                            formattedDataList[index] = .addPhotoOrVideoCell(data)
-                            onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
-                        }
+            if case var .addPhotoOrVideoCell(data) = element {
+                for (indexSecond, item) in data.cell.enumerated() {
+                    guard item.id == id else { continue }
+                    data.cell.remove(at: indexSecond)
+                    if data.cell.count == 1 {
+                        formattedDataList[index] = .addPhotoOrVideoEmptyCell(.init(title: Constants.AddPhotoOrVideoEmptyCell.title.rawValue, description: Constants.AddPhotoOrVideoEmptyCell.description.rawValue))
+                        onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
+                    } else if data.cell.count == 6 && data.cell.last?.image != nil {
+                        data.cell.append(.init(image: nil))
+                        formattedDataList[index] = .addPhotoOrVideoCell(data)
+                        onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
+                    } else {
+                        formattedDataList[index] = .addPhotoOrVideoCell(data)
+                        onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
                     }
                 }
-            default:
-                break
             }
         }
     }
@@ -178,7 +167,7 @@ final class ProductFeedbackViewModel {
     //MARK: - Stars rating tapped
     
     func onStarsRatingTapped(touch: Double, width: CGFloat) {
-        switch DataModel.ProductStarsCell.StarsRatingView.TapLocation.getLocation(touch: touch, firstElementLocation: width) {
+        switch ProductStarsCellModel.StarsRatingViewModel.TapLocation.getLocation(touch: touch, firstElementLocation: width) {
         case .first:
             createUpdateRatingCells(title: "Ужасно", currentRating: .first)
         case .second:
@@ -199,8 +188,7 @@ final class ProductFeedbackViewModel {
     func changeFirstResponder(id: UUID) {
         var counterOfCell = 0
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .reviewTextCell(let data):
+            if case let .reviewTextCell(data) = element {
                 if id == data.id {
                     counterOfCell += 1
                 } else if counterOfCell == 1 {
@@ -208,8 +196,6 @@ final class ProductFeedbackViewModel {
                     formattedDataList[index] = .reviewTextCell(data)
                     counterOfCell += 1
                 }
-            default:
-                break
             }
         }
     }
@@ -219,46 +205,62 @@ final class ProductFeedbackViewModel {
 
 private extension ProductFeedbackViewModel {
     
-    //MARK: - Load formatted function
-    
-    func loadAndBuildFormattedData(placeholder: String, numberOfResponder: Int) {
-        formattedDataList.append(.reviewTextCell(.init(placeholder: placeholder, isFirstResponder: .init(false))))
-    }
-    
     //MARK: - Formatted data function
 
     func formatReceivedDataFirst() {
-        formattedDataList.append(.productInfoCell(.init(title: receivedData.title, description: Constants.ProductInfoCell.description.rawValue, imageName: receivedData.imageName)))
-        formattedDataList.append(.productStarsCell(.init(title: Constants.ProductStarsCell.title.rawValue, rating: .init(currentRating: .none))))
-        formattedDataList.append(.addPhotoOrVideoEmptyCell(.init(title: Constants.AddPhotoOrVideoEmptyCell.title.rawValue, description: Constants.AddPhotoOrVideoEmptyCell.description.rawValue)))
-        loadAndBuildFormattedData(placeholder: Constants.ReviewTextCell.placeholderFirst.rawValue, numberOfResponder: 1)
-        loadAndBuildFormattedData(placeholder: Constants.ReviewTextCell.placeholderSecond.rawValue, numberOfResponder: 2)
-        loadAndBuildFormattedData(placeholder: Constants.ReviewTextCell.placeholderThird.rawValue, numberOfResponder: 3)
-        formattedDataList.append(.sendReviewCell(.init(buttonTitle: Constants.SendReviewCell.buttonTitle.rawValue, userAgreement: Constants.SendReviewCell.userAgreement.rawValue, userAgreementHighlighted: Constants.SendReviewCell.userAgreementHighlighted.rawValue, checkBox: .init(title: Constants.SendReviewCell.checkBoxTitle.rawValue, isActive: false, image: Constants.SendReviewCell.checkBoxImage.rawValue))))
+        formattedDataList = [
+            .productInfoCell(ProductInfoCellModel(title: receivedData.title,
+                                                  description: Constants.ProductInfoCell.description.rawValue,
+                                                  imageName: receivedData.imageName)),
+            .productStarsCell(ProductStarsCellModel(title: Constants.ProductStarsCell.title.rawValue,
+                                                    rating: ProductStarsCellModel.StarsRatingViewModel(currentRating: .none))),
+            .addPhotoOrVideoEmptyCell(AddPhotoOrVideoEmptyCellModel(title: Constants.AddPhotoOrVideoEmptyCell.title.rawValue,
+                                                                    description: Constants.AddPhotoOrVideoEmptyCell.description.rawValue)),
+            .reviewTextCell(ReviewTextCellModel(placeholder: Constants.ReviewTextCell.placeholderFirst.rawValue, isFirstResponder: Observable(nil))),
+            .reviewTextCell(ReviewTextCellModel(placeholder: Constants.ReviewTextCell.placeholderSecond.rawValue, isFirstResponder: Observable(nil))),
+            .reviewTextCell(ReviewTextCellModel(placeholder: Constants.ReviewTextCell.placeholderThird.rawValue, isFirstResponder: Observable(nil))),
+            .sendReviewCell(SendReviewCellModel(buttonTitle: Constants.SendReviewCell.buttonTitle.rawValue,
+                                                userAgreement: Constants.SendReviewCell.userAgreement.rawValue,
+                                                userAgreementHighlighted: Constants.SendReviewCell.userAgreementHighlighted.rawValue,
+                                                checkBox: SendReviewCellModel.CheckBoxViewModel(title: Constants.SendReviewCell.checkBoxTitle.rawValue,
+                                                                                                isActive: Observable(false))))
+        ]
         onDataReload.value = true
     }
     
     //MARK: - Create rating cells
     
-    func createUpdateRatingCells(title: String? = nil, currentRating: DataModel.ProductStarsCell.StarsRatingView.TapLocation) {
+    func createUpdateRatingCells(title: String? = nil, currentRating: ProductStarsCellModel.StarsRatingViewModel.TapLocation) {
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .starsErrorCell:
+            if case .starsErrorCell = element {
                 formattedDataList.remove(at: index)
                 onCellDeleteAtIndex.value = IndexPath(row: index, section: 0)
-            default:
-                break
             }
         }
         
         for (index, element) in formattedDataList.enumerated() {
-            switch element {
-            case .productStarsCell:
+            if case .productStarsCell = element {
                 formattedDataList[index] = .productStarsCell(.init(title: title, rating: .init(currentRating: currentRating)))
                 onCellReloadAtIndex.value = IndexPath(row: index, section: 0)
-            default:
-                break
             }
         }
+    }
+    
+    //MARK: - Find nonrepeating image
+    
+    func findImage(_ currentImageList: [AddPhotoOrVideoCellModel.PhotoCellModel]) -> String {
+        
+        for element in imageArray {
+            var isContains = false
+            for elementSecond in currentImageList {
+                if elementSecond.image == element {
+                    isContains = true
+                }
+            }
+            if !isContains {
+                return element
+            }
+        }
+        return ""
     }
 }

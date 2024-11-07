@@ -17,11 +17,13 @@ final class ProductFeedbackView: UIView {
         return tableView
     }()
     
-    var viewModel: ProductFeedbackViewModel
+    //MARK: - Public properties
+    
+    var viewModel: ProductFeedbackViewModelInput & ProductFeedbackViewModelOutput
     
     //MARK: - Initialization
     
-    init(viewModel: ProductFeedbackViewModel) {
+    init(viewModel: ProductFeedbackViewModelInput & ProductFeedbackViewModelOutput) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -71,7 +73,6 @@ final class ProductFeedbackView: UIView {
         tableView.snp.makeConstraints { make in
             make.top.bottom.trailing.leading.equalToSuperview()
         }
-        layoutSubviews()
     }
 }
 

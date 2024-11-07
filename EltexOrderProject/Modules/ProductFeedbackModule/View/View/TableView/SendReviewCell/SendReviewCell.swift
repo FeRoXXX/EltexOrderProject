@@ -40,7 +40,7 @@ final class SendReviewCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.SendReviewCell? {
+    var viewModel: SendReviewCellModel? {
         didSet {
             updateData()
         }

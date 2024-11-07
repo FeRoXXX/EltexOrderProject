@@ -12,26 +12,31 @@ final class FeedbackView: UIView {
     
     //MARK: - Private properties
     
-    private var productTableView: ProductTableView = {
+    private lazy var productTableView: ProductTableView = {
         let tableView = ProductTableView()
         return tableView
     }()
     
-    //MARK: - Public properties
-    
-    var cellDidChange: ((Int) -> Void)?
+    private var viewModel: FeedbackViewModelInput
     
     //MARK: - Initialization
     
-    init() {
+    init(viewModel: FeedbackViewModelInput) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         setupUI()
-        setupClosures()
+        self.productTableView.viewModel = viewModel
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Table reload function
+    
+    func reloadTable() {
+        productTableView.reloadData()
     }
 }
 
@@ -56,22 +61,5 @@ private extension FeedbackView {
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
-    }
-    
-    //MARK: - Closures initialization
-    
-    func setupClosures() {
-        productTableView.cellDidSelect = { [weak self] index in
-            self?.cellDidChange?(index)
-        }
-    }
-}
-
-//MARK: - Extension
-
-extension FeedbackView {
-    
-    func setupData(_ data: [ProductTableModel]) {
-        productTableView.viewModel = data
     }
 }

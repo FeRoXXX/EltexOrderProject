@@ -52,7 +52,7 @@ final class ProductInfoCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.ProductInfoCell? {
+    var viewModel: ProductInfoCellModel? {
         didSet {
             updateData()
         }

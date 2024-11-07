@@ -60,7 +60,7 @@ final class AddPhotoOrVideoEmptyCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.AddPhotoOrVideoEmptyCell? {
+    var viewModel: AddPhotoOrVideoEmptyCellModel? {
         didSet {
             updateData()
         }

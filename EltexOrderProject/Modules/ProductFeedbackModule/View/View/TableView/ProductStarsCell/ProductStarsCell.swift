@@ -27,7 +27,6 @@ final class ProductStarsCell: UITableViewCell {
     
     private var starsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Ваша оценка"
         label.font = .systemFont(ofSize: 16)
         label.textColor = #colorLiteral(red: 0.4784313725, green: 0.4784313725, blue: 0.4784313725, alpha: 1)
         return label
@@ -43,7 +42,7 @@ final class ProductStarsCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.ProductStarsCell? {
+    var viewModel: ProductStarsCellModel? {
         didSet {
             updateData()
         }

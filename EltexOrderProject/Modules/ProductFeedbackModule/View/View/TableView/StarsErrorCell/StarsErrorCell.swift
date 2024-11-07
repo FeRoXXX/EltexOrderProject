@@ -37,7 +37,7 @@ final class StarsErrorCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.StarsErrorCell? {
+    var viewModel: StarsErrorCellModel? {
         didSet {
             updateData()
         }

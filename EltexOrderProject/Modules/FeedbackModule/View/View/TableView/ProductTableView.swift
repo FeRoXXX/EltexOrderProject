@@ -13,14 +13,7 @@ final class ProductTableView: UITableView {
     
     //MARK: - Public properties
     
-    var cellDidSelect: ((Int) -> Void)?
-    
-    var viewModel: [ProductTableModel] = [] {
-        didSet {
-            updateUI()
-        }
-    }
-    
+    var viewModel: FeedbackViewModelInput?
     
     //MARK: - Initialization
     
@@ -36,12 +29,6 @@ final class ProductTableView: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: - Public methods
-    
-    func updateUI() {
-        self.reloadData()
-    }
 }
 
 //MARK: - TableViewProtocols
@@ -49,11 +36,12 @@ final class ProductTableView: UITableView {
 extension ProductTableView: TableViewProtocols {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.count
+        viewModel?.data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentData = viewModel[indexPath.row]
+        guard let viewModel else { return UITableViewCell() }
+        let currentData = viewModel.data[indexPath.row]
         let tableViewCell = UITableViewCell()
         var configuration = tableViewCell.defaultContentConfiguration()
         configuration.text = currentData.title
@@ -69,7 +57,7 @@ extension ProductTableView: TableViewProtocols {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        cellDidSelect?(indexPath.row)
+        viewModel?.cellDidChange(indexPath.row)
     }
 }
 

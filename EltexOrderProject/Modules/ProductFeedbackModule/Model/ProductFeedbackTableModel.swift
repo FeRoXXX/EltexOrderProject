@@ -9,134 +9,24 @@ import Foundation
     
 enum DataModel: Equatable {
     
-    case productInfoCell(ProductInfoCell)
-    case productStarsCell(ProductStarsCell)
-    case addPhotoOrVideoEmptyCell(AddPhotoOrVideoEmptyCell)
-    case reviewTextCell(ReviewTextCell)
-    case sendReviewCell(SendReviewCell)
-    case starsErrorCell(StarsErrorCell)
-    case addPhotoOrVideoCell(AddPhotoOrVideoCell)
+    //MARK: - Product image and description
+    case productInfoCell(ProductInfoCellModel)
     
-    struct ProductInfoCell: Equatable {
-        let title: String
-        let description: String
-        let imageName: String
-    }
+    //MARK: - Product rating and estimation
+    case productStarsCell(ProductStarsCellModel)
     
-    struct ProductStarsCell: Equatable {
-        static func == (lhs: ProductStarsCell, rhs: ProductStarsCell) -> Bool {
-            return lhs.title == rhs.title && lhs.rating == rhs.rating
-        }
-        
-        let title: String?
-        let rating: StarsRatingView
-        
-        struct StarsRatingView: Equatable {
-            static func == (lhs: ProductStarsCell.StarsRatingView, rhs: ProductStarsCell.StarsRatingView) -> Bool {
-                return lhs.currentRating == rhs.currentRating
-            }
-            
-            let currentRating: TapLocation
-            
-            enum TapLocation {
-                case first
-                case second
-                case third
-                case fourth
-                case fifth
-                case none
-                
-                static func getLocation(touch: Double, firstElementLocation: CGFloat) -> Self {
-                    
-                    switch touch {
-                    case 0..<firstElementLocation + 8:
-                        return .first
-                    case firstElementLocation..<(firstElementLocation + 8)*2:
-                        return .second
-                    case firstElementLocation*2..<(firstElementLocation + 8)*3:
-                        return .third
-                    case firstElementLocation*3..<(firstElementLocation + 8)*4:
-                        return .fourth
-                    default:
-                        return .fifth
-                    }
-                }
-            }
-        }
-    }
+    //MARK: - Add media button
+    case addPhotoOrVideoEmptyCell(AddPhotoOrVideoEmptyCellModel)
     
-    struct AddPhotoOrVideoEmptyCell: Equatable {
-        let title: String
-        let description: String
-        
-        static func == (lhs: AddPhotoOrVideoEmptyCell, rhs: AddPhotoOrVideoEmptyCell) -> Bool {
-            lhs.description == rhs.description && lhs.title == rhs.title
-        }
-    }
+    //MARK: - Product user review
+    case reviewTextCell(ReviewTextCellModel)
     
-    struct ReviewTextCell: Equatable {
-        
-        let placeholder: String
-        var isFirstResponder: Observable<Bool>?
-        let id: UUID = UUID()
-        var changeFirstResponder: ((UUID)->Void)?
-        
-        static func == (lhs: ReviewTextCell, rhs: ReviewTextCell) -> Bool {
-            return lhs.placeholder == rhs.placeholder && lhs.id == rhs.id
-        }
-    }
+    //MARK: - Product send review button and checkbox
+    case sendReviewCell(SendReviewCellModel)
     
-    struct SendReviewCell: Equatable {
-        let buttonTitle: String
-        let userAgreement: String
-        let userAgreementHighlighted: String
-        var checkBox: CheckBoxView
-        
-        struct CheckBoxView: Equatable {
-            let title: String
-            var isActive: Bool
-            var image: String
-            
-            static func == (lhs: SendReviewCell.CheckBoxView, rhs: SendReviewCell.CheckBoxView) -> Bool {
-                return lhs.title == rhs.title && lhs.image == rhs.image && lhs.isActive == rhs.isActive
-            }
-        }
-        
-        static func == (lhs: SendReviewCell, rhs: SendReviewCell) -> Bool {
-            return lhs.buttonTitle == rhs.buttonTitle && lhs.userAgreement == rhs.userAgreement && lhs.checkBox == rhs.checkBox
-        }
-    }
+    //MARK: - Error
+    case starsErrorCell(StarsErrorCellModel)
     
-    struct StarsErrorCell: Equatable {
-        let errorLabel: String
-    }
-    
-    struct AddPhotoOrVideoCell: Equatable {
-        var cell: [PhotoCell]
-        
-        struct PhotoCell: Equatable {
-            let image: String?
-            let id: UUID = UUID()
-            
-            static func == (lhs: AddPhotoOrVideoCell.PhotoCell, rhs: AddPhotoOrVideoCell.PhotoCell) -> Bool {
-                return lhs.image == rhs.image
-            }
-        }
-    }
-    
-    static func == (lhs: DataModel, rhs: DataModel) -> Bool {
-        switch (lhs, rhs) {
-        case (.addPhotoOrVideoCell, .addPhotoOrVideoCell),
-            (.addPhotoOrVideoEmptyCell, .addPhotoOrVideoEmptyCell),
-            (.productInfoCell, .productInfoCell),
-            (.productStarsCell, .productStarsCell),
-            (.reviewTextCell,.reviewTextCell),
-            (.sendReviewCell, .sendReviewCell),
-            (.starsErrorCell, .starsErrorCell):
-            return true
-        default:
-            return false
-        }
-    }
+    //MARK: - Collection of media elements
+    case addPhotoOrVideoCell(AddPhotoOrVideoCellModel)
 }
-

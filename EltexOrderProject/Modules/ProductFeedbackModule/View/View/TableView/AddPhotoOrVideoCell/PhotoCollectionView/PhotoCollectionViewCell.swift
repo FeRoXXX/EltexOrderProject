@@ -32,7 +32,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.AddPhotoOrVideoCell.PhotoCell? {
+    var viewModel: AddPhotoOrVideoCellModel.PhotoCellModel? {
         didSet {
             updateData()
         }

@@ -50,7 +50,7 @@ final class StarsRatingView: UIView {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.ProductStarsCell.StarsRatingView? {
+    var viewModel: ProductStarsCellModel.StarsRatingViewModel? {
         didSet {
             updateData()
         }

@@ -22,13 +22,12 @@ final class CheckBoxView: UIView {
     private let additionalTextLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
-        label.text = "Оставить отзыв анонимно"
         return label
     }()
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.SendReviewCell.CheckBoxView? {
+    var viewModel: SendReviewCellModel.CheckBoxViewModel? {
         didSet {
             updateData()
         }
@@ -87,7 +86,14 @@ private extension CheckBoxView {
     
     func updateData() {
         additionalTextLabel.text = viewModel?.title
-        checkBoxImageView.image = UIImage(named: viewModel?.image ?? "checkbox")
+        viewModel?.isActive.bind({ [weak self] value in
+            guard let value else { return }
+            if value {
+                self?.checkBoxImageView.image = .checkboxFill
+            } else {
+                self?.checkBoxImageView.image = .checkbox
+            }
+        })
     }
     
     //MARK: - Setup gesture function

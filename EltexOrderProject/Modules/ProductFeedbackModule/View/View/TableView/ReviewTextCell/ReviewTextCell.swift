@@ -29,7 +29,7 @@ final class ReviewTextCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.ReviewTextCell? {
+    var viewModel: ReviewTextCellModel? {
         didSet {
             updateData()
         }

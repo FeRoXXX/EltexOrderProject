@@ -26,7 +26,7 @@ final class AddPhotoOrVideoCell: UITableViewCell {
     
     //MARK: - Public properties
     
-    var viewModel: DataModel.AddPhotoOrVideoCell? {
+    var viewModel: AddPhotoOrVideoCellModel? {
         didSet {
             updateData()
         }

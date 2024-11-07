@@ -12,7 +12,7 @@ final class ProductFeedbackViewController: UIViewController {
     //MARK: - Private properties
     
     private lazy var contentView = ProductFeedbackView(viewModel: viewModel)
-    private let viewModel: ProductFeedbackViewModel
+    private let viewModel: ProductFeedbackViewModelInput & ProductFeedbackViewModelOutput
     
     //MARK: - Lifecycle functions
     

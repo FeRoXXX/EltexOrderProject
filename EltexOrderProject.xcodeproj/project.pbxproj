@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -159,6 +159,10 @@
 		27EC9FA42CBFF0CD00BEF768 /* PromoCodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTableViewCell.swift; sourceTree = "<group>"; };
 		27FEF7932CD635E500138B0D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		27ED668A2D02A2F7008B2017 /* OrderCancellationModule */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = OrderCancellationModule; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		27EC9F742CBF823100BEF768 /* Frameworks */ = {
@@ -621,6 +625,7 @@
 		27EC9F902CBF827200BEF768 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				27ED668A2D02A2F7008B2017 /* OrderCancellationModule */,
 				27E2109F2CD2793D000F6896 /* ProductFeedbackModule */,
 				27B35ED02CD1390000981916 /* FeedbackModule */,
 				279F6A2F2CCB77650002892F /* ActivatePromocodeModule */,
@@ -693,6 +698,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				27ED668A2D02A2F7008B2017 /* OrderCancellationModule */,
 			);
 			name = EltexOrderProject;
 			packageProductDependencies = (

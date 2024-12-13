@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct PromocodeView: View {
-    @State var promocodeName: String
-    @State var promocodeDate: String
-    @State var promocodeDescription: String?
+    @State var promocode: PromoCode
     var body: some View {
         HStack {
             Circle()
@@ -21,10 +19,10 @@ struct PromocodeView: View {
                 .padding(.leading, -8)
             VStack(spacing: 0) {
                 HStack(spacing: 4) {
-                    Text(promocodeName)
+                    Text(promocode.title)
                         .font(.system(size: 16, weight: .medium))
                         .layoutPriority(1)
-                    Text("-5%")
+                    Text(promocode.percent.formattedDiscount())
                         .foregroundStyle(.white)
                         .padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
                         .background(Color(#colorLiteral(red: 0, green: 0.7176470588, blue: 0.4588235294, alpha: 1)))
@@ -33,19 +31,19 @@ struct PromocodeView: View {
                     Button {
                         
                     } label: {
-                        Image(systemName: "info.circle")
+                        Image("Info")
                             .resizable()
                             .foregroundStyle(Color(#colorLiteral(red: 0.4784313725, green: 0.4784313725, blue: 0.4784313725, alpha: 1)))
                     }
                     .frame(width: 20, height: 20)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Text(promocodeDate)
+                Text(promocode.date)
                     .font(.system(size: 14))
                     .foregroundStyle(Color(#colorLiteral(red: 0.4784313725, green: 0.4784313725, blue: 0.4784313725, alpha: 1)))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 8)
-                if let promocodeDescription {
+                if let promocodeDescription = promocode.description {
                     Text(promocodeDescription)
                         .font(.system(size: 12, weight: .medium))
                         .foregroundStyle(Color(#colorLiteral(red: 0.4784313725, green: 0.4784313725, blue: 0.4784313725, alpha: 1)))

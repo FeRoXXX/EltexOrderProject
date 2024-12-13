@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct SberScoresView: View {
+    @State var score: Int
     var body: some View {
         HStack(spacing: 0) {
-            Text("+5%")
+            Text(score.formattedSberScores())
                 .foregroundStyle(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
                 .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 2))
             Image("SberScores")

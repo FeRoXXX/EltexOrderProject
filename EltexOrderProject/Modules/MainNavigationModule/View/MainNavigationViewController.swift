@@ -83,9 +83,22 @@ private extension MainNavigationViewController {
         case .review:
             navigationController?.pushViewController(FeedbackModuleAssembly.build(), animated: true)
         case .orderCancel:
-            navigationController?.pushViewController(UIHostingController(rootView: OrderCancellationView()), animated: true)
+            DispatchQueue.main.async {
+                //self.navigationController?.isNavigationBarHidden = true
+                self.navigationController?.pushViewController(UIHostingController(rootView: OrderCancellationView()), animated: true)
+            }
         case .order:
-            navigationController?.pushViewController(UIHostingController(rootView: OrderMakingView()), animated: true)
+            navigationController?.isNavigationBarHidden = false
+            
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = .white
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            
+            let orderMakingView = UIHostingController(rootView: OrderMakingView())
+            orderMakingView.navigationItem.title = "Оформление заказа"
+            navigationController?.pushViewController(orderMakingView, animated: true)
         }
     }
 }

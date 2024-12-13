@@ -161,6 +161,8 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2703CA4E2D0C27280076CB50 /* MainNavigationModule */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MainNavigationModule; sourceTree = "<group>"; };
+		2703CA5C2D0C3CC40076CB50 /* OrderMakingModule */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = OrderMakingModule; sourceTree = "<group>"; };
 		27ED668A2D02A2F7008B2017 /* OrderCancellationModule */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = OrderCancellationModule; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -625,6 +627,8 @@
 		27EC9F902CBF827200BEF768 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2703CA5C2D0C3CC40076CB50 /* OrderMakingModule */,
+				2703CA4E2D0C27280076CB50 /* MainNavigationModule */,
 				27ED668A2D02A2F7008B2017 /* OrderCancellationModule */,
 				27E2109F2CD2793D000F6896 /* ProductFeedbackModule */,
 				27B35ED02CD1390000981916 /* FeedbackModule */,
@@ -700,6 +704,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				2703CA4E2D0C27280076CB50 /* MainNavigationModule */,
+				2703CA5C2D0C3CC40076CB50 /* OrderMakingModule */,
 				27ED668A2D02A2F7008B2017 /* OrderCancellationModule */,
 			);
 			name = EltexOrderProject;

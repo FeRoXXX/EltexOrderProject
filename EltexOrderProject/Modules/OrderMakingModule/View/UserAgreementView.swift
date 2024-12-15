@@ -9,11 +9,19 @@ import SwiftUI
 
 struct UserAgreementView: View {
     var body: some View {
-        Text(" Нажимая кнопку «Оформить заказ»,\nВы соглашаетесь с Условиями оферты")
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.leading, 16)
-            .padding(.trailing, 16)
-            .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
+        HStack {
+            Text(" Нажимая кнопку «Оформить заказ»,\nВы соглашаетесь с ")
+                .font(.system(size: 12, weight: .regular))
+                .foregroundStyle(Color(#colorLiteral(red: 0.4784313725, green: 0.4784313725, blue: 0.4784313725, alpha: 1)))
+            +
+            Text("Условиями оферты")
+                .font(.system(size: 12, weight: .regular))
+                .foregroundStyle(.black)
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.leading, 16)
+        .padding(.trailing, 16)
+        .background(Color(#colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)))
     }
 }
 

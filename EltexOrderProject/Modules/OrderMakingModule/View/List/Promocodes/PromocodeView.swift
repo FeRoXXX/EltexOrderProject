@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PromocodeView: View {
-    @State var promocode: PromoCode
+    @ObservedObject var promocode: PromoCode
+    var calculate: ((PromoCode) -> Void)?
     var body: some View {
         HStack {
             Circle()
@@ -52,8 +53,11 @@ struct PromocodeView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.leading, 4)
-            Toggle(isOn: .constant(true)) {
-                
+            Toggle(isOn: $promocode.isActive) {
+            }
+            .tint(Color(#colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)))
+            .onChange(of: promocode.isActive) {
+                calculate?(promocode)
             }
             .frame(maxWidth: 42)
             .padding(.trailing, 12)

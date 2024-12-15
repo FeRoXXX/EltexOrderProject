@@ -59,7 +59,7 @@ private extension OrderInfoViewController {
 extension OrderInfoViewController: OrderInfoViewModelDelegate {
     
     func openActivePromocode(_ data: [Order.Promocode]) {
-        navigationController?.pushViewController(ActivePromocodeModuleAssembly.build(data, viewModel), animated: true)
+        navigationController?.pushViewController(ActivePromocodeModuleAssembly.build(data, viewModel, nil), animated: true)
     }
     
     func cellDidChange(_ data: [OrderInfoTableViewModel]) {

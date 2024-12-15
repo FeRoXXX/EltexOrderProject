@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResultPriceView: View {
-    @State var resultPrice: String
+    @Binding var resultPrice: String
     var body: some View {
         HStack(spacing: 0) {
             Text("Итог")

@@ -10,7 +10,7 @@ import Foundation
 final class ActivePromocodeViewModel {
     
     //MARK: - Properties
-    weak var delegate: ActivePromocodeViewModelDelegate? {
+    weak var delegate: ActivePromocodeViewModelDelegate?{
         didSet {
             delegate?.setupTitle(title)
             activePromocodeData.forEach {
@@ -41,11 +41,13 @@ final class ActivePromocodeViewModel {
     
     private weak var previousViewModel: OrderInfoViewModel?
     private var promoCodesList: [Order.Promocode]
+    private var viewModel: OrderMakingViewModel?
     
     //MARK: - Initialization
-    init(promoCodesList: [Order.Promocode], previousViewModel: OrderInfoViewModel) {
+    init(promoCodesList: [Order.Promocode] = [], previousViewModel: OrderInfoViewModel? = nil, viewModel: OrderMakingViewModel? = nil) {
         self.promoCodesList = promoCodesList
         self.previousViewModel = previousViewModel
+        self.viewModel = viewModel
         self.title = TextConstants.ActivatePromocodeModule.ActivatePromocodeViewController.title.rawValue
         activePromocodeData = []
         activePromocodeData.append(
@@ -66,15 +68,31 @@ private extension ActivePromocodeViewModel {
     
     func checkPromoCode(_ promoCode: String?) {
         
-        for element in promoCodesList {
-            if element.title == promoCode {
-                previousViewModel?.setViewModelData(element)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: .init(block: { [weak self] in
-                    self?.delegate?.closeWindow()
-                }))
-                return
+        if previousViewModel != nil {
+            
+            for element in promoCodesList {
+                if element.title == promoCode {
+                    previousViewModel?.setViewModelData(element)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: .init(block: { [weak self] in
+                        self?.delegate?.closeWindow()
+                    }))
+                    return
+                }
             }
+            errorMessage = "Такого промокода не существует"
+        } else {
+            guard let viewModel else { return }
+            for element in promoCodesList {
+                if element.title == promoCode {
+                    let promocode = PromoCode(title: element.title, date: "По 15 декабря", description: element.info, percent: element.percent, isActive: element.active)
+                    viewModel.addNewPromocode(promocode: promocode)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: .init(block: { [weak self] in
+                        self?.delegate?.closeWindow()
+                    }))
+                    return
+                }
+            }
+            errorMessage = "Такого промокода не существует"
         }
-        errorMessage = "Такого промокода не существует"
     }
 }

@@ -11,7 +11,12 @@ struct ProductRowView: View {
     @State var product: OrderModel
     var body: some View {
         HStack(spacing: 0) {
-            Image(product.imageURL)
+            AsyncImage(url: product.imageURL, content: { image in
+                image.resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 80, height: 80)
+            }, placeholder: {})
+                .frame(width: 80, height: 80)
                 .clipShape(.capsule(style: .circular))
                 .frame(maxHeight: .infinity, alignment: .top)
             VStack(spacing: 0) {

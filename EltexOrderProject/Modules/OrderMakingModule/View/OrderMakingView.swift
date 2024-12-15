@@ -18,7 +18,7 @@ struct OrderMakingView: View {
                     switch currentValue.type {
                     case .order(let orderList):
                         Section {
-                            AdditionalTextView(additionalText: "Вы можете изменить параметры и состав заказа в корзине")
+                            AdditionalTextView(additionalText: "Вы можете изменить параметры и состав заказа в ", textWithAnyColor: "корзине")
                             ForEach(orderList) { currentRow in
                                 ProductRowView(product: currentRow)
                             }
@@ -28,7 +28,9 @@ struct OrderMakingView: View {
                     case .payment(let paymentList):
                         Section {
                             ForEach(paymentList) { currentRow in
-                                PaymentMethodView(method: currentRow)
+                                PaymentMethodView(method: currentRow, onSelect: {
+                                    viewModel.setActivePaymentMethod(currentRow)
+                                }, onCalculate: viewModel.calculatePrice)
                             }
                         } header: {
                             HeaderView(headerText: "Способы оплаты")
@@ -36,17 +38,17 @@ struct OrderMakingView: View {
                     case .promoCode(let promocodeList):
                         Section {
                             AdditionalTextView(additionalText: "На один товар можно применить только один промокод")
-                            ApplyPromocodeButtonView()
+                            ApplyPromocodeButtonView(viewModel: viewModel)
                             ForEach(promocodeList) { currentRow in
-                                PromocodeView(promocode: currentRow)
+                                PromocodeView(promocode: currentRow, calculate: viewModel.calculatePrice)
                             }
-                            HidePromocodeButtonView()
-                            PriceCountingView(isSupportButtonHidden: true, priceColor: .black, countingTitle: "Цена за 2 товара", price: "25 000 P")
+                            HidePromocodeButtonView(hidePromocodes: viewModel.hidePromocodes)
+                            PriceCountingView(isSupportButtonHidden: true, priceColor: .black, countingTitle: viewModel.priceAfterDiscount.numberOfProducts, price: $viewModel.priceAfterDiscount.totalPrice)
                                 .padding(.top, 19)
                                 .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
-                            PriceCountingView(isSupportButtonHidden: true, priceColor: Color(#colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)), countingTitle: "Скидки", price: "-5 000 P")
-                            PriceCountingView(isSupportButtonHidden: false, priceColor: Color(#colorLiteral(red: 0, green: 0.754624784, blue: 0.5331450701, alpha: 1)), countingTitle: "Промокоды", price: "-5 000 P")
-                            PriceCountingView(isSupportButtonHidden: true, priceColor: .black, countingTitle: "Способы оплаты", price: "-5 000 P")
+                            PriceCountingView(isSupportButtonHidden: true, priceColor: Color(#colorLiteral(red: 1, green: 0.3689950705, blue: 0.06806527823, alpha: 1)), countingTitle: "Скидки", price: $viewModel.priceAfterDiscount.totalDiscount)
+                            PriceCountingView(isSupportButtonHidden: false, priceColor: Color(#colorLiteral(red: 0, green: 0.754624784, blue: 0.5331450701, alpha: 1)), countingTitle: "Промокоды", price: $viewModel.priceAfterDiscount.totalPromoCode)
+                            PriceCountingView(isSupportButtonHidden: true, priceColor: .black, countingTitle: "Способы оплаты", price: $viewModel.priceAfterDiscount.totalPaymentMethod)
                                 .padding(.bottom, 11)
                                 .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
                                 .alignmentGuide(.listRowSeparatorLeading) { _ in
@@ -56,7 +58,7 @@ struct OrderMakingView: View {
                                     return viewDimensions.width - 16
                                 }
                                 .listRowSeparator(.visible)
-                            ResultPriceView(resultPrice: "19 000 P")
+                            ResultPriceView(resultPrice: $viewModel.priceAfterDiscount.totalResultPrice)
                             PaymentButtonView()
                             UserAgreementView()
                         } header: {
@@ -70,6 +72,7 @@ struct OrderMakingView: View {
             }
             .background(Color(#colorLiteral(red: 0.9719485641, green: 0.9719484448, blue: 0.9719485641, alpha: 1)))
             .listStyle(.grouped)
+            .buttonStyle(PlainButtonStyle())
             .environment(\.defaultMinListRowHeight, 20)
         }
         .navigationBarBackButtonHidden()

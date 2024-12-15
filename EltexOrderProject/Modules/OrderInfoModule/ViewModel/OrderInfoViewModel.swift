@@ -361,7 +361,7 @@ private extension OrderInfoViewModel {
         }
         
         orderListFormatted.append(.init(type: .bottomItem(.init(
-            generalTitle: formatPrice(for: orderList.products.count),
+            generalTitle: orderList.products.count.formatPrice(),
             generalPrice: totalPriceOutput.formatPriceWithoutDegree(),
             discountTitle: TextConstants.OrderInfoModule.TableView.BottomItemCell.discountTitle.rawValue,
             discountPrice: orderList.baseDiscount?.formatPrice() ?? "0 ₽",
@@ -414,28 +414,6 @@ private extension OrderInfoViewModel {
                 }
             }
         }
-    }
-    
-    //MARK: - Price formatter
-    func formatPrice(for quantity: Int) -> String {
-        let suffix: String
-        let lastDigit = quantity % 10
-        let lastTwoDigits = quantity % 100
-        
-        if lastTwoDigits >= 11 && lastTwoDigits <= 14 {
-            suffix = "товаров"
-        } else {
-            switch lastDigit {
-            case 1:
-                suffix = "товар"
-            case 2, 3, 4:
-                suffix = "товара"
-            default:
-                suffix = "товаров"
-            }
-        }
-        
-        return "Цена за \(quantity) \(suffix)"
     }
     
     //MARK: - filter hidden promoCode

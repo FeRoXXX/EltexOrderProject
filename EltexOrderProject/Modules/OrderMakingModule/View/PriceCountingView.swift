@@ -11,7 +11,7 @@ struct PriceCountingView: View {
     @State var isSupportButtonHidden: Bool = true
     @State var priceColor: Color
     @State var countingTitle: String
-    @State var price: String
+    @Binding var price: String
     
     var body: some View {
         HStack(spacing: 0) {

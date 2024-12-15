@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct OrderListModel: Identifiable {
-    let type: Types
+    var type: Types
     var id = UUID()
     
     enum Types {
@@ -18,40 +19,44 @@ struct OrderListModel: Identifiable {
     }
 }
 
-class PaymentMethod: Identifiable {
+class PaymentMethod: Identifiable, ObservableObject {
     var image: String
     var title: String
     var discount: Int
     var sberScores: Int?
     var description: String
+    @Published var isActive: Bool = false
     var id = UUID()
     
-    init(image: String, title: String, discount: Int, sberScores: Int? = nil, description: String) {
+    init(image: String, title: String, discount: Int = 0, sberScores: Int? = nil, description: String, isActive: Bool = false) {
         self.image = image
         self.title = title
         self.discount = discount
         self.sberScores = sberScores
         self.description = description
+        self.isActive = isActive
     }
 }
 
-class PromoCode: Identifiable {
+class PromoCode: Identifiable, ObservableObject {
     var title: String
     var date: String
     var description: String?
     var percent: Int
+    @Published var isActive: Bool
     var id = UUID()
     
-    init(title: String, date: String, description: String? = nil, percent: Int) {
+    init(title: String, date: String, description: String? = nil, percent: Int, isActive: Bool = false) {
         self.title = title
         self.date = date
         self.description = description
         self.percent = percent
+        self.isActive = isActive
     }
 }
 
 class OrderModel: Identifiable {
-    var imageURL: String
+    var imageURL: URL
     var productName: String
     var productCount: Int
     var size: Int?
@@ -61,7 +66,7 @@ class OrderModel: Identifiable {
     var productPriceByCount: Double = 0.0
     var id = UUID()
     
-    init(imageURL: String, productName: String, productCount: Int, size: Int? = nil, price: Double, discount: Int) {
+    init(imageURL: URL, productName: String, productCount: Int, size: Int? = nil, price: Double, discount: Int) {
         self.imageURL = imageURL
         self.productName = productName
         self.productCount = productCount

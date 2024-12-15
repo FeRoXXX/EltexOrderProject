@@ -83,10 +83,15 @@ private extension MainNavigationViewController {
         case .review:
             navigationController?.pushViewController(FeedbackModuleAssembly.build(), animated: true)
         case .orderCancel:
-            DispatchQueue.main.async {
-                //self.navigationController?.isNavigationBarHidden = true
-                self.navigationController?.pushViewController(UIHostingController(rootView: OrderCancellationView()), animated: true)
-            }
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = .white
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            
+            let orderCancellationView = UIHostingController(rootView: OrderCancellationView())
+            orderCancellationView.navigationItem.title = "Отмена заказа"
+            navigationController?.pushViewController(orderCancellationView, animated: true)
         case .order:
             navigationController?.isNavigationBarHidden = false
             

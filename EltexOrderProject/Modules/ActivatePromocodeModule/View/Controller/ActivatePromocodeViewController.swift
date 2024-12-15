@@ -19,6 +19,13 @@ final class ActivatePromocodeViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        setupBackButton()
+        self.navigationController?.navigationBar.topItem?.title = "Применить промокод"
+    }
+    
     //MARK: - Initialization
     init(viewModel: ActivePromocodeViewModel) {
         self.viewModel = viewModel
@@ -67,7 +74,7 @@ extension ActivatePromocodeViewController: ActivePromocodeViewModelDelegate {
     }
     
     func setupTitle(_ title: String) {
-        self.title = title
+        self.navigationController?.navigationBar.topItem?.title = title
     }
     
     func closeWindow() {

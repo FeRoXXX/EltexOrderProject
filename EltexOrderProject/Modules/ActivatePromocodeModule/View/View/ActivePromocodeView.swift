@@ -13,5 +13,6 @@ struct ActivePromocodeView: View {
     var body: some View {
         ActivePromocodeViewControllerWrapper(viewModel: viewModel)
             .ignoresSafeArea()
+            .navigationBarHidden(true)
     }
 }

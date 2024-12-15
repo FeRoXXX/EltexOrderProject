@@ -129,11 +129,11 @@ final class OrderCalculateService {
                 }
             }
         }
-        
+        var isExist = false
         listArray.enumerated().forEach { index, value in
             switch value.type {
             case .promoCode(var array):
-                if !array.contains(where: { $0.id == promocode.id }) {
+                if !allPromoCodes.contains(where: { $0.title == promocode.title }) {
                     if isPromocodesHidden {
                         promocode.isActive = true
                         allPromoCodes.append(promocode)
@@ -146,10 +146,19 @@ final class OrderCalculateService {
                         listArray.remove(at: index)
                         listArray.insert(.init(type: .promoCode(array)), at: index)
                     }
+                } else {
+                    isExist = true
                 }
             default:
                 break
             }
+        }
+        
+        if isExist {
+            if let error = checkPromocode(listArray: &listArray, promocode: promocode) {
+                return error
+            }
+            return "Такой промокод уже существует"
         }
         
         if activePromocodeCount >= 3 {

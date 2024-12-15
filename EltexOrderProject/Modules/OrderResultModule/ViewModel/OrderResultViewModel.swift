@@ -9,7 +9,12 @@ import Foundation
 import Combine
 
 final class OrderResultViewModel: ObservableObject {
+    
+    //MARK: - Public properties
+    
     @Published var viewData: OrderResultModel
+    
+    //MARK: - Initialization
     
     init() {
         viewData = .init(image: "bagSuccess", result: "Спасибо за заказ!", description: "Заказ успешно оформлен. Вы можете отслеживать его статус в личном кабинете.", buttonText: "Продолжить покупки", statusButton: "Статус заказа")
@@ -20,6 +25,8 @@ final class OrderResultViewModel: ObservableObject {
 //MARK: - Private extension
 
 private extension OrderResultViewModel {
+    
+    //MARK: - Get result
     
     func getOrderResult() -> OrderResultModel {
         let arrayOfResults: [OrderResultModel] = [

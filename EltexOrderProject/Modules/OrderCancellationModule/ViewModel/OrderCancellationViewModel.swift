@@ -10,6 +10,8 @@ import Combine
 
 final class OrderCancellationViewModel: ObservableObject {
     
+    //MARK: - Public properties
+    
     @Published var data: [OrderCancellationListModel] = [
         .init(type: .checkRow("Не подходит дата получения")),
         .init(type: .checkRow("Часть товаров из заказа была отменена")),
@@ -21,9 +23,13 @@ final class OrderCancellationViewModel: ObservableObject {
         .init(type: .cancelButton("Отменить заказ"))
     ]
     
+    //MARK: - Cancel order
+    
     func cancelOrder() {
         
     }
+    
+    //MARK: - Show error
     
     func showErrorCell() {
         if data.contains(where: { value in
@@ -38,6 +44,8 @@ final class OrderCancellationViewModel: ObservableObject {
         }
     }
     
+    //MARK: - Hide error
+    
     func hideErrorCell() {
         data.removeAll { value in
             if value.type.caseType == OrderCancellationListModel.Types.error().caseType {
@@ -46,6 +54,8 @@ final class OrderCancellationViewModel: ObservableObject {
             return false
         }
     }
+    
+    //MARK: - Prepare problem
     
     func prepareProblemDescription(isOther: Bool) {
         if isOther {

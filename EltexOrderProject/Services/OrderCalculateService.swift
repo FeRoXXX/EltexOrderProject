@@ -10,9 +10,16 @@ import Combine
 
 final class OrderCalculateService {
     
-    static let shared = OrderCalculateService()
+    //MARK: - Private properties
+    
     private var allPromoCodes: [PromoCode] = []
     private var isPromocodesHidden: Bool = false
+    
+    //MARK: - Static properties
+    
+    static let shared = OrderCalculateService()
+    
+    //MARK: - Calculate order price
     
     func calculatePrice(orderList: [OrderModel], paymentMethod: PaymentMethod, promocodes: [PromoCode]) -> (numberOfProducts: Int, totalPrice: Double, totalPriceAfterDiscount: Double, productDiscount: Double, paymentDiscount: Double, promoCodeDiscount: Double) {
         let orderTotalWithDiscount = orderList.reduce(0.0) { result, order in
@@ -42,6 +49,8 @@ final class OrderCalculateService {
         return (productsCount, orderTotal, totalAfterPaymentDiscount, productDiscount, paymentDiscountAmount, promoCodeDiscountResult)
     }
     
+    //MARK: - Filter active promocode
+    
     func filterPromoCodes(promocodes: [PromoCode]) -> [PromoCode] {
         if !isPromocodesHidden {
             allPromoCodes = promocodes
@@ -62,7 +71,9 @@ final class OrderCalculateService {
         }
     }
     
-    func checkPromocode(listArray: inout [OrderListModel], promocode: PromoCode) {
+    //MARK: - Check promocode
+    
+    func checkPromocode(listArray: inout [OrderListModel], promocode: PromoCode) -> String? {
         var activePromocode = 0
         
         listArray.forEach { value in
@@ -87,11 +98,16 @@ final class OrderCalculateService {
                     break
                 }
             }
+            return "Нельзя активировать больше 2х промокодов"
         }
+        
+        return nil
     }
     
-    func addNewPromocode(listArray: inout [OrderListModel], promocode: PromoCode) {
-        var activePromocodeCount = 0
+    //MARK: - Add new promocode
+    
+    func addNewPromocode(listArray: inout [OrderListModel], promocode: PromoCode) -> String? {
+        var activePromocodeCount = 1
         listArray.forEach { value in
             switch value.type {
             case .promoCode(let array):
@@ -135,6 +151,12 @@ final class OrderCalculateService {
                 break
             }
         }
+        
+        if activePromocodeCount >= 3 {
+            return "Нельзя активировать больше 2х промокодов, последний был отменен"
+        }
+        
+        return nil
     }
 
 }

@@ -10,7 +10,7 @@ import Combine
 
 final class OrderMakingViewModel: ObservableObject {
     
-    //MARK: - Private properties
+    //MARK: - Public properties
     
     @Published var listData: [OrderListModel] = []
     @Published var priceAfterDiscount: OrderCalculateResult = .init(numberOfProducts: 0.formatPrice(),
@@ -19,6 +19,10 @@ final class OrderMakingViewModel: ObservableObject {
                                                                     totalPaymentMethod: "0",
                                                                     totalPromoCode: "0",
                                                                     totalResultPrice: "0")
+    @Published var alertMessage: String = ""
+    @Published var showAlert: Bool = false
+    
+    //MARK: - Initialization
     
     init() {
         setupFirstData()
@@ -115,6 +119,9 @@ extension OrderMakingViewModel {
         }
     }
     
+    
+    //MARK: - Calculate price
+    
     func calculatePrice(promocode: PromoCode? = nil) {
         var orderList: [OrderModel] = []
         var paymentMethod: PaymentMethod?
@@ -139,7 +146,11 @@ extension OrderMakingViewModel {
         }
         
         if let promocode {
-            OrderCalculateService.shared.checkPromocode(listArray: &listData, promocode: promocode)
+            let error = OrderCalculateService.shared.checkPromocode(listArray: &listData, promocode: promocode)
+            if let error {
+                alertMessage = error
+                showAlert = true
+            }
         }
         guard let paymentMethod else { return }
         let calculateResult = OrderCalculateService.shared.calculatePrice(orderList: orderList, paymentMethod: paymentMethod, promocodes: promocodes)
@@ -150,6 +161,8 @@ extension OrderMakingViewModel {
                                                   totalPromoCode: "-\(calculateResult.promoCodeDiscount.formatPriceWithoutDegree())",
                                                   totalResultPrice: calculateResult.totalPriceAfterDiscount.formatPriceWithoutDegree())
     }
+    
+    //MARK: - Hide promocodes
     
     func hidePromocodes() {
         for (index, element) in listData.enumerated() {
@@ -163,8 +176,14 @@ extension OrderMakingViewModel {
         }
     }
     
+    //MARK: - AddNewPromocodes
+    
     func addNewPromocode(promocode: PromoCode) {
-        OrderCalculateService.shared.addNewPromocode(listArray: &listData, promocode: promocode)
+        let error = OrderCalculateService.shared.addNewPromocode(listArray: &listData, promocode: promocode)
+        if let error {
+            alertMessage = error
+            showAlert = true
+        }
         calculatePrice()
     }
 }
